@@ -1,11 +1,37 @@
 from flask import Flask
 from flask import render_template
 
+import cx_Oracle
+
 app = Flask(__name__)
+
+db_config = {
+  'user':'alcohol',
+  'password':'comp322'
+}
+
+def connectdb():
+    query = 'select * from ALCOHOL'
+    conn = cx_Oracle.connect(**db_config)
+    cursor = conn.cursor()
+    cursor.execute(query)
+    return cursor
+
+def get_data(cursor):
+    result = cursor.fetchone()
+    print(result)
+    return result
+
 
 @app.route('/')
 def main():
-    return render_template('index.html')
+    cursor = connectdb()
+    data = []
+    for _ in range(10):
+        result = get_data(cursor=cursor)
+        data.append(result)
+    print(result)
+    return render_template('index.html', data = data)
 
 @app.route('/sign')
 def sign():
