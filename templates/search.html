@@ -27,7 +27,7 @@
         <div class="flex flex-col items-center">
             <!-- Logo and Image Placeholder -->
             <div class="w-24 h-24 bg-gray-300 rounded-full mb-4">
-                <img src="../static/image/main_img.png"></img>
+                <img src="../static/image/main_img.png">
             </div>
 
             <!-- Faint line to divide sections -->
@@ -67,15 +67,15 @@
 
             <!-- Star Rating -->
             <div class="star-rating mb-4">
-                <span class="star selected">&#9733;</span>
-                <span class="star selected">&#9733;</span>
-                <span class="star selected">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
                 <span class="star">&#9733;</span>
                 <span class="star">&#9733;</span>
             </div>
 
             <!-- Search Button -->
-            <button onclick="window.location.href='results.html'" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+            <button onclick="search()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
                 Search
             </button>
         </div>
@@ -94,6 +94,25 @@
                 });
             });
         });
+
+        function search() {
+            var beerType = document.getElementById("beerType").value;
+            var beerName = document.getElementById("beerName").value;
+            var price = document.getElementById("price").value;
+            var selectedStars = document.querySelectorAll('.star-rating .star.selected').length;
+
+            // AJAX 요청
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", `{{ url_for('main.search_condition') }}?beerType=${beerType}&beerName=${beerName}&price=${price}&selectedStars=${selectedStars}`, true);
+            xhr.send();
+            xhr.onload = function() {
+                if (xhr.status == 200) {
+                    // 서버로부터의 응답 처리
+                    console.log(xhr.responseText);
+                    window.location.href = "{{ url_for('main.main') }}";
+                }
+            };
+        }
     </script>
 </body>
 </html>
