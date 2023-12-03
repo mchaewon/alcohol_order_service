@@ -6,7 +6,11 @@ oracle = Oracledb()
 
 @order_bp.route("/mypage")
 def mypage():
-  return render_template('my_page.html')
+  userid = session['userid']
+  query = f"select * from CUSTOMER where Customer_ID = '{userid}'"
+  result = list(oracle.select(query, 1)[0])
+  result[4] = str(result[4]).split()[0]
+  return render_template('my_page.html', data = result)
 
 
 @order_bp.route("/orderlist")

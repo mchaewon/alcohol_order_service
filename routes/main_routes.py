@@ -43,17 +43,24 @@ def search_condition():
 def cover():
     return render_template('cover.html')
 
-@main_bp.route('/notice')
-def notice():
-    return render_template('notice.html')
+@main_bp.route('/notice/<int:page_num>')
+def notice(page_num):
+    query = "SELECT * FROM NOTICE N order by written_date desc"
+    result = oracle.selectall(query)
+    page, result = oracle.selectpage(query, 20, page_num)
+    return render_template('notice.html', page=page, data=result)
 
 @main_bp.route('/find')
 def find():
     return render_template('search.html')
 
-@main_bp.route('/store')
-def store():
-    return render_template('store.html')
+@main_bp.route('/store/<int:page_num>')
+def store(page_num):
+    query = "SELECT * FROM store"
+    result = oracle.selectall(query)
+    page, result = oracle.selectpage(query, 20, page_num)
+    return render_template('store.html', page=page, data=result)
+
 
 @main_bp.route('/detail/<alcohol_id>')
 def detail(alcohol_id):
