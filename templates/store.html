@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+        }
+        .hover-bg-change:hover {
+            background-color: #e2e8f0; /* light gray */
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    {% include 'lib/header.html' %}
+
+    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 flex">
+        <!-- 메뉴 박스 크게 하기 -->
+        {% include 'lib/mymenu.html' %}
+        
+        <main class="w-3/4 h-3/4 bg-white p-5 shadow-md rounded-lg">
+            <h1 class="text-2xl font-semibold mb-4">Store</h1>
+            <div class="flex items-center mb-5">
+                <div class="ml-auto">
+                    <select class="border p-2">
+                        <option>Choose a city</option>
+                        <option>Seoul</option>
+                        <option>Busan</option>
+                        <option>Daegu</option>
+                    </select>
+                    <input type="text" placeholder="Search" class="border p-2">
+                    <button class="px-2 py-2 bg-gray-200 rounded">🔍</button>
+                </div>
+            </div>
+            <!-- Table -->
+            <table class="min-w-full">
+                <thead>
+                    <tr>
+                        <th class="border px-4 py-2">Store Name</th>
+                        <th class="border px-4 py-2">Address</th>
+                        <th class="border px-4 py-2">Phone</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border px-4 py-2">stor name1</td>
+                        <td class="border px-4 py-2">Daegu Metropolitan City</td>
+                        <td class="border px-4 py-2">010-</td>
+                    </tr>
+                    <!-- Additional rows fetched from the database -->
+                </tbody>
+            </table>
+            <!-- Pagination -->
+            <div class="flex justify-center p-4 border-t">
+                <div class="flex items-center space-x-1">
+                    <a href="#" class="px-3 py-1 border rounded hover:bg-gray-200">1</a>
+                    <!-- More pagination links would be added here -->
+                </div>
+            </div>
+        </main>
+    </div>
+    <script>
+        // Optional: Any additional JavaScript can be added here.
+    </script>
+</body>
+</html>
