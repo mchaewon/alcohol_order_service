@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        lightgray: '#f7f7f7',
+                        darkgray: '#e5e5e5',
+                        hoverblue: '#e0f2fe',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+        }
+        .sidebar-button:hover {
+            background-color: var(--tw-color-hoverblue);
+        }
+        .sidebar-button.active {
+            background-color: var(--tw-color-darkgray);
+        }
+        .hover-bg-change:hover {
+            background-color: #e2e8f0; /* light gray */
+        }
+        .hover-text-blue:hover {
+            color: #60a5fa; /* light blue */
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    {% include 'lib/header.html' %}
+
+    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 flex">
+        <!-- 사이드 박스를 메인 박스 높이에 맞게 동적으로 바뀌게 만들기 -->
+        <aside class="w-1/4 pr-4">
+            <ul class="bg-white shadow-md rounded-lg p-4 sticky top-6 text-center">
+                <div class="space-y-2">
+                    <li class="py-2"><a href="#" class="hover-bg-change p-2 rounded">My page</a></li>
+                    <li class="py-2"><a href="#" class="hover-bg-change p-2 rounded">Order List</a></li>
+                    <li class="py-2"><a href="#" class="hover-bg-change p-2 rounded">Cart</a></li>
+                    <li class="py-2"><a href="#" class="hover-bg-change p-2 rounded">Notcie</a></li>
+                    <li class="py-2"><a href="#" class="hover-bg-change p-2 rounded">Store</a></li>
+                </div>
+            </ul>
+        </aside>
+        <main class="w-3/4 h-3/4 bg-white p-5 shadow-md rounded-lg">
+            <h1 class="text-2xl font-bold mb-6">Cart</h1>
+                <div class="bg-white p-4 rounded shadow-md">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-gray-600">
+                            <img src="https://via.placeholder.com/100" alt="Product Image" class="ml-4">
+                            <div class="ml-4">
+                                <p class="font-bold">CASS_LIGHT_355</p>
+                                <p class="text-gray-500">4,200원</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <p class="text-lg">2</p>
+                            <p class="text-lg ml-4">4,200원</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-gray-600">
+                            <img src="https://via.placeholder.com/100" alt="Product Image" class="ml-4">
+                            <div class="ml-4">
+                                <p class="font-bold">CASS_LIGHT_355</p>
+                                <p class="text-gray-500">4,200원</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <p class="text-lg">2</p>
+                            <p class="text-lg ml-4">4,200원</p>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-4 border-t">
+                        <div class="flex justify-between items-center">
+                            <p class="text-lg font-bold">주문 금액</p>
+                            <p class="text-lg font-bold">6,400원</p>
+                        </div>
+                        <button class="w-full mt-4 bg-gray-300 text-gray-700 py-2 rounded hover:bg-gray-400">주문하기</button>
+                    </div>
+                </div>
+        </main>
+    </div>
+
+    <script>
+        // Optional: Any additional JavaScript can be added here.
+    </script>
+</body>
+</html>
