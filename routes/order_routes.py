@@ -12,9 +12,9 @@ def mypage():
   result[4] = str(result[4]).split()[0]
   return render_template('my_page.html', data = result)
 
-
 @order_bp.route("/orderlist")
 def orderlist():
+
   return render_template('order_list.html')
 
 @order_bp.route("/add_to_cart", methods=['POST'])
@@ -28,6 +28,16 @@ def add_to_cart():
         t.append([alhocol_id, quantity])
         session['cart'] = t
     return redirect(url_for('order.cart'))
+
+@order_bp.route("/delete_cart", methods=['POST'])
+def delete_cart():
+    if request.method == 'POST':
+        alhocol_id = request.form.get('id')
+        quantity = request.form.get('quantity')
+        t = list(session['cart'])
+        t.remove([alhocol_id, quantity])
+        session['cart'] = t
+    return redirect(url_for('order.cart'))
        
 
 @order_bp.route("/cart")
@@ -36,7 +46,6 @@ def cart():
     print(session)
     cartdata = []
     total_price = 0
-    print(cart)
     for x in cart:
         query = f"select * from ALCOHOL where Alcohol_ID = '{x[0]}'"
         tmp = oracle.select(query, 1)[0]
