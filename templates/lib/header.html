@@ -1,12 +1,12 @@
-<header class="bg-white shadow-md">
+<header class="bg-white shadow-md" style="height: 8vh; width: 100%">
   <div
-    class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-between items-center"
+    class="max-w-7xl mx-auto py-0 px-4 sm:px-6 lg:px-8 flex justify-between items-center h-full"
   >
-    <div class="flex items-center space-x-4 justify-between w-full">
+    <div class="flex items-center space-x-4 w-full h-full">
       <!-- 로고 이미지 크기 조정 -->
-      <div class="flex items-center">
+      <div class="flex items-center h-full" style="overflow: hidden">
         <img
-          width="200"
+          style="height: 180%"
           src="../static/image/main_img.png"
           alt="Logo"
           class="mr-2"
@@ -15,7 +15,7 @@
         />
       </div>
       <!-- 메뉴 오른쪽 정렬 -->
-      <nav class="md:flex space-x-4 ml-auto">
+      <nav class="md:flex space-x-4 flex-grow justify-end items-center h-full">
         <a
           href="{{ url_for('main.notice', page_num=1) }}"
           class="text-gray-600 hover:text-gray-900"
