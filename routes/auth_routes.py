@@ -1,25 +1,42 @@
 # routes/auth_routes.py
-from flask import render_template, request, redirect, url_for, session
+from flask import render_template, request, redirect, url_for, session, Blueprint
 from models import User
 from config import SECRET_KEY
+from database.db import Oracledb
 
-from app import app, oracle
+auth_bp = Blueprint('auth', __name__)
+oracle = Oracledb()
 
-@app.route('/login')
+@auth_bp.route('/login')
 def login():
     return render_template('signin.html')
 
-@app.route('/signup')
+@auth_bp.route('/logout')
+def logout():
+    session.pop('userid', None)
+    return redirect(url_for('auth.login'))
+
+
+@auth_bp.route('/signup')
 def signup():
     return render_template('signup.html')
 
-@app.route('/login_process_form', methods=['POST'])
+@auth_bp.route('/signup_process_form', methods=['POST'])
+def signup_process_form():
+    if request.method == 'POST':
+        pass
+    else:
+        return "invalid access"
+
+@auth_bp.route('/login_process_form', methods=['POST'])
 def login_process_form():
     if request.method == 'POST':
         user_id = request.form.get('id')
         password = request.form.get('password')
         if oracle.authenticate_user(user_id, password):
             session['userid'] = user_id
-            return redirect(url_for('main'))
+            return redirect(url_for('main.main'))
         else:
-            return redirect(url_for('login'))
+            return redirect(url_for('auth.login'))
+    else:
+        return "invalid access"
