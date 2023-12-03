@@ -10,13 +10,12 @@ def main():
     if 'userid' in session:
         type_param = request.args.get('type', default='all', type=str)
         if type_param == 'all':
-            query = "SELECT A.Name, A.Price, A.Alcohol_degree, A.Type, round(avg(P.Star_rating),1) AS star FROM ALCOHOL A, POINT P WHERE A.Alcohol_ID=P.Alcohol_ID group by A.Name, A.Price, A.Alcohol_degree, A.Type"
+            query = "SELECT A.Name, A.Price, A.Alcohol_degree, A.Type, round(avg(P.Star_rating),1) AS star, A.Alcohol_ID FROM ALCOHOL A, POINT P WHERE A.Alcohol_ID=P.Alcohol_ID group by A.Name, A.Price, A.Alcohol_degree, A.Type, A.Alcohol_ID"
         elif type_param == 'etc':
             l = "('soju', 'beer', 'makgeolli', 'wine', 'sake', 'whiskey', 'tequila', 'brandy', 'gin', 'rum')"
-            query = f"SELECT A.Name, A.Price, A.Alcohol_degree, A.Type, ROUND(AVG(P.Star_rating), 1) AS Avg_Star_Rating FROM ALCOHOL A JOIN POINT P ON A.Alcohol_ID = P.Alcohol_ID WHERE lower(A.Type) NOT IN {l} GROUP BY A.Name, A.Price, A.Alcohol_degree, A.Type"
+            query = f"SELECT A.Name, A.Price, A.Alcohol_degree, A.Type, ROUND(AVG(P.Star_rating), 1) AS Avg_Star_Rating, A.Alcohol_ID FROM ALCOHOL A JOIN POINT P ON A.Alcohol_ID = P.Alcohol_ID WHERE lower(A.Type) NOT IN {l} GROUP BY A.Name, A.Price, A.Alcohol_degree, A.Type, A.Alcohol_ID"
         else:
-            query = f"SELECT A.Name, A.Price, A.Alcohol_degree, A.Type, round(avg(P.Star_rating),1) FROM ALCOHOL A, POINT P WHERE A.Alcohol_ID=P.Alcohol_ID and type like '%{type_param}%' group by A.Name, A.Price, A.Alcohol_degree, A.Type"
-        print(query)
+            query = f"SELECT A.Name, A.Price, A.Alcohol_degree, A.Type, round(avg(P.Star_rating),1), A.Alcohol_ID FROM ALCOHOL A, POINT P WHERE A.Alcohol_ID=P.Alcohol_ID and type like '%{type_param}%' group by A.Name, A.Price, A.Alcohol_degree, A.Type, A.Alcohol_ID"
         result = oracle.select(query, 12)
 
         return render_template('index.html', data=result)
@@ -43,3 +42,23 @@ def search_condition():
 @main_bp.route('/cover')
 def cover():
     return render_template('cover.html')
+
+@main_bp.route('/notice')
+def notice():
+    return render_template('notice.html')
+
+@main_bp.route('/find')
+def find():
+    return render_template('search.html')
+
+@main_bp.route('/store')
+def store():
+    return render_template('store.html')
+
+@main_bp.route('/detail/<alcohol_id>')
+def detail(alcohol_id):
+    print(alcohol_id)
+    query = f"SELECT A.Name, A.Price, A.Alcohol_degree, A.Type, round(avg(P.Star_rating),1) AS star, A.Alcohol_ID FROM ALCOHOL A, POINT P WHERE A.Alcohol_ID=P.Alcohol_ID and A.Alcohol_ID = '{alcohol_id}' group by A.Name, A.Price, A.Alcohol_degree, A.Type, A.Alcohol_ID"
+    
+    result = oracle.select(query, 1)
+    return render_template('uni_alcohol.html', data=result[0])

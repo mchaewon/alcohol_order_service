@@ -26,15 +26,7 @@
 
     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 flex">
         <!-- 메뉴 박스 크게 하기 -->
-        <aside class="w-1/4 pr-4 h-3/4">
-            <ul class="bg-white shadow-md rounded-lg p-4 sticky top-6 text-center">
-                <li class="py-2"><a href="#" class="hover:text-blue-500">My page</a></li>
-                <li class="py-2"><a href="#" class="hover:text-blue-500">Order List</a></li>
-                <li class="py-2"><a href="#" class="hover:text-blue-500">Cart</a></li>
-                <li class="py-2"><a href="#" class="hover:text-blue-500">Notcie</a></li>
-                <li class="py-2"><a href="#" class="hover:text-blue-500">Store</a></li>
-            </ul>
-        </aside>
+        {% include 'lib/mymenu.html' %}
         <main class="w-3/4 h-3/4">
             <div class="bg-white p-6 rounded-lg profile-card max-w-md w-full h-full">
                 <div class="grid grid-cols-2 gap-4">
