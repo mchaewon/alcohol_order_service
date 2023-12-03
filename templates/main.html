@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FFE08C;
+        }
+
+        .custom-button, .logo{
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s ease, transform 0.5s ease;
+        }
+
+        .custom-button.show, .logo.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .rounded-full {
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3); /* 그림자 추가 */
+        }
+        .custom-button {
+            background-color: #f29354;
+            color: #FFF;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+        }
+        .custom-button:hover{
+            background-color:#f36c6c;
+            transition: 0.7s;
+        }
+    </style>
+</head>
+<body>
+    <div class="flex flex-col items-center justify-center h-screen">
+        <!-- Logo Image Placeholder -->
+        <div class="mb-6 logo">
+            <img src="../static/image/main_img.png" alt="Logo" class="rounded-full">
+        </div>
+        <!-- Divider (not visible) -->
+        <div class="border-t border-transparent w-full mb-6"></div>
+
+        <!-- Buttons -->
+        <div class="flex justify-center space-x-5 custom-button-container">
+            <a href="/signup" class="custom-button">회원가입</a>
+            <a href="/login" class="custom-button">로그인</a>
+        </div>
+        
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Logo animation
+            setTimeout(function() {
+                document.querySelector('.logo').classList.add('show');
+            }, 500);
+
+            // Button animation
+            setTimeout(function() {
+                document.querySelectorAll('.custom-button').forEach(function(button) {
+                    button.classList.add('show');
+                });
+            }, 800);
+        });
+    </script>
+</body>
+</html>
