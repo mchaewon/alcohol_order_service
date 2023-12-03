@@ -6,6 +6,7 @@ class Oracledb:
         db_config = {
             'user': 'alcohol',
             'password': 'comp322',
+            'dsn':'localhost:1521/orcl'
         }
         self.conn = cx_Oracle.connect(**db_config)
         self.cursor = self.conn.cursor()

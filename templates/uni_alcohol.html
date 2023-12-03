@@ -35,7 +35,7 @@
                 <!-- Product Info -->
                 {% if data %}
                 <div class="w-1/2 pl-10">
-                    <p class="text-gray-600 mb-4">{{data[3]}}   {{data[2]}}%</p>
+                    <p class="text-gray-600 mb-4">{{data[3]}} {{data[2]}}%</p>
                     <h2 class="text-2xl font-semibold mb-2">{{data[0]}}</h2>
                     <p class="text-gray-600 mb-4">{{data[1]}}₩</p>
                     <div class="flex items-center mb-4">
@@ -44,10 +44,13 @@
                         {% endfor %}</span>
                         <span class="ml-2 text-sm text-gray-600">({{data[4]}}/5)</span>
                     </div>
-                    <div class="flex items-center mb-4">
-                        <input type="number" min="1" value="1" class="border p-2 mr-2 w-16 text-center">
-                        <button class="bg-blue-500 text-white px-4 py-2 rounded">Add to Cart</button>
-                    </div>
+                    <form action="/add_to_cart" method="POST">
+                        <input type="hidden" name="id" value="{{ data[5] }}">
+                        <div class="flex items-center mb-4">
+                            <input type="number" min="1" value="1" name="quantity" class="border p-2 mr-2 w-16 text-center">
+                            <button class="bg-blue-500 text-white px-4 py-2 rounded">Add to Cart</button>
+                        </div>
+                    </form>
                 </div>
                 {% else %}  
                 <p>No data available</p>
