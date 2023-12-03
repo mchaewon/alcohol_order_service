@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alcohol Catalog</title>
+    <title>Uni Alcohol</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <style>
@@ -27,7 +27,7 @@
                     <img src="../static/image/main_img.png" alt="Logo" class="mr-2"></img>
                 </div>
                 <!-- 메뉴 오른쪽 정렬 -->
-                <nav class="hidden md:flex space-x-4 justify-end">
+                <nav class="hidden md:flex space-x-4">
                     <a href="#" class="text-gray-600 hover:text-gray-900">Notice</a>
                     <a href="#" class="text-gray-600 hover:text-gray-900">Search</a>
                     <a href="#" class="text-gray-600 hover:text-gray-900">Store</a>
@@ -57,32 +57,27 @@
             </ul>
         </aside>
         <main class="w-3/4">
-            <div class="bg-white shadow-md rounded-lg p-4 mb-6">
-                <!-- Search and filters -->
-                <div class="flex items-center space-x-3 mb-5">
-                    <input type="text" placeholder="Search alcohol name" class="border p-2">
-                    <button class="px-2 py-2 bg-gray-200 rounded">🔍</button>
-                    <input type="text" placeholder="Min price" class="border p-2">
-                    <input type="text" placeholder="Max price" class="border p-2">
-                    <select class="border p-2">
-                        <option>⭐</option>
-                        <option>⭐⭐</option>
-                        <option>⭐⭐⭐</option>
-                        <option>⭐⭐⭐⭐</option>
-                        <option>⭐⭐⭐⭐⭐</option>
-                    </select>
+            <!-- Product Display -->
+            <!-- 동적으로 받아와야함 -->
+            <div class="flex">
+                <!-- Product Image -->
+                <div class="w-1/2">
+                    <img src="https://via.placeholder.com/400" alt="Beer" class="rounded-lg shadow-lg">
                 </div>
-                <div class="grid grid-cols-3 gap-4">
-                    <!-- 반복으로 디비에 있는 card 수 보이기 Placeholder for cards -->
-                    <div class="card bg-gray-200 rounded-lg p-4 text-center">
-                        <div style="text-align:center">
-                            <img src="https://via.placeholder.com/150" alt="Alcohol" class="rounded-md mb-2">
-                        </div>
-                        <div class="font-semibold">Product Name</div>
-                        <div class="text-sm">Price</div>
-                        <div class="text-sm">Rating</div>
+
+                <!-- Product Info -->
+                <div class="w-1/2 pl-10">
+                    <p class="text-gray-600 mb-4">Beer 4%</p>
+                    <h2 class="text-2xl font-semibold mb-2">CASS - Light - 355ml</h2>
+                    <p class="text-gray-600 mb-4">2,100₩</p>
+                    <div class="flex items-center mb-4">
+                        <span class="text-yellow-400 text-lg">★ ★ ★</span>
+                        <span class="ml-2 text-sm text-gray-600">(3.1/5)</span>
                     </div>
-                    <!-- Repeat for each card -->
+                    <div class="flex items-center mb-4">
+                        <input type="number" min="1" value="1" class="border p-2 mr-2 w-16 text-center">
+                        <button class="bg-blue-500 text-white px-4 py-2 rounded">Add to Cart</button>
+                    </div>
                 </div>
             </div>
         </main>
