@@ -115,11 +115,11 @@
     <div class="row g-5">  
       <div class="col-lg-8">
         <h4 class="mb-3">회원가입</h4>
-        <form class="needs-validation" novalidate>
+        <form class="needs-validation" action="{{ url_for('auth.signup_process_form') }}" method="POST" novalidate>
           <div class="row g-3">
             <div class="col-12">
               <label for="ID" class="form-label">ID</label>
-              <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+              <input type="text" name="id" class="form-control" placeholder="" value="" required>
               <div class="invalid-feedback">
                 Valid ID is required.
               </div>
@@ -127,16 +127,15 @@
 
             <div class="col-12">
               <label for="Name" class="form-label">Name</label>
-              <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+              <input type="text" name="name" class="form-control" placeholder="" value="" required>
               <div class="invalid-feedback">
                 Valid name is required.
               </div>
             </div>
 
-            
             <div class="col-12">
-              <label for="Name" class="form-label">Password</label>
-              <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+              <label for="Password" class="form-label">Password</label>
+              <input type="password" name="password" class="form-control" placeholder="" value="" required>
               <div class="invalid-feedback">
                 Valid password is required.
               </div>
@@ -144,38 +143,28 @@
 
 
             <div class="col-12">
-              <label for="address" class="form-label">Phone</label>
-              <input type="text" class="form-control" id="address" placeholder="010-xxxx-yyyy" required>
+              <label for="Phone" class="form-label">Phone Number</label>
+              <input type="text" class="form-control" name="phonenum" placeholder="010-xxxx-yyyy" required>
               <div class="invalid-feedback">
-                Please enter your shipping address.
+                Please enter your phone number.
               </div>
             </div>
 
             <div class="col-12">
-              <label for="address" class="form-label">Birthday</label>
-              <input type="text" class="form-control" id="address" placeholder="2000-01-01" required>
+              <label for="birth" class="form-label">Birthday</label>
+              <input type="text" class="form-control" name="birth" placeholder="2000-01-01" required>
               <div class="invalid-feedback">
-                Please enter your shipping address.
+                Please enter your birthday.
               </div>
             </div>
 
             <div class="col-12">
               <label for="address" class="form-label">Address</label>
-              <input type="text" class="form-control" id="address" placeholder="" required>
+              <input type="text" class="form-control" name="address" placeholder="" required>
               <div class="invalid-feedback">
                 Please enter your address.
               </div>
             </div>
-
-            
-
-            
-
-
-          
-
-          
-          
 
           <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to sign up</button>
         </form>
