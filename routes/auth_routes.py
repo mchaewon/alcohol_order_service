@@ -24,7 +24,17 @@ def signup():
 @auth_bp.route('/signup_process_form', methods=['POST'])
 def signup_process_form():
     if request.method == 'POST':
-        pass
+        user_id = request.form.get('id')
+        name = request.form.get('name')
+        password = request.form.get('password')
+        phonenum = request.form.get('phonenum')
+        birth = request.form.get('birth')
+        address = request.form.get('address')
+        info = [user_id, name, password, phonenum, birth, address]
+        if oracle.signup(info):
+            return "Success"
+        else:
+            return redirect(url_for("auth.signup"))
     else:
         return "invalid access"
 
@@ -40,3 +50,5 @@ def login_process_form():
             return redirect(url_for('auth.login'))
     else:
         return "invalid access"
+    
+
