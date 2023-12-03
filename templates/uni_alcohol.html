@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uni Alcohol</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+        }
+        .card {
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <header class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <!-- 로고 이미지 크기 조정 -->
+                <div class="main_logo flex items-center">
+                    <img src="../static/image/main_img.png" alt="Logo" class="mr-2"></img>
+                </div>
+                <!-- 메뉴 오른쪽 정렬 -->
+                <nav class="hidden md:flex space-x-4">
+                    <a href="#" class="text-gray-600 hover:text-gray-900">Notice</a>
+                    <a href="#" class="text-gray-600 hover:text-gray-900">Find</a>
+                    <a href="#" class="text-gray-600 hover:text-gray-900">Store</a>
+                    <a href="#" class="text-gray-600 hover:text-gray-900">MyPage</a>
+                    <a href="#" class="text-gray-600 hover:text-gray-900">Logout</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 flex">
+        <!-- 메뉴 박스 크게 하기 -->
+        <aside class="w-1/4 pr-4">
+            <ul class="bg-white shadow-md rounded-lg p-4 sticky top-6">
+                <li class="py-2"><a href="#" class="hover:text-blue-500">All</a></li>
+                <li class="py-2"><a href="#" class="hover:text-blue-500">Soju</a></li>
+                <li class="py-2"><a href="#" class="hover:text-blue-500">Beer</a></li>
+                <li class="py-2"><a href="#" class="hover:text-blue-500">Makgeolic</a></li>
+                <li class="py-2"><a href="#" class="hover:text-blue-500">Wine</a></li>
+                <li class="py-2"><a href="#" class="hover:text-blue-500">Sake</a></li>
+                <li class="py-2"><a href="#" class="hover:text-blue-500">Whiskey</a></li>
+                <li class="py-2"><a href="#" class="hover:text-blue-500">Tequila</a></li>
+                <li class="py-2"><a href="#" class="hover:text-blue-500">Brandy</a></li>
+                <li class="py-2"><a href="#" class="hover:text-blue-500">Gin</a></li>
+                <li class="py-2"><a href="#" class="hover:text-blue-500">Rum</a></li>
+                <li class="py-2"><a href="#" class="hover:text-blue-500">ETC</a></li>
+            </ul>
+        </aside>
+        <main class="w-3/4">
+            <!-- Product Display -->
+            <!-- 동적으로 받아와야함 -->
+            <div class="flex">
+                <!-- Product Image -->
+                <div class="w-1/2">
+                    <img src="https://via.placeholder.com/400" alt="Beer" class="rounded-lg shadow-lg">
+                </div>
+
+                <!-- Product Info -->
+                <div class="w-1/2 pl-10">
+                    <p class="text-gray-600 mb-4">Beer 4%</p>
+                    <h2 class="text-2xl font-semibold mb-2">CASS - Light - 355ml</h2>
+                    <p class="text-gray-600 mb-4">2,100₩</p>
+                    <div class="flex items-center mb-4">
+                        <span class="text-yellow-400 text-lg">★ ★ ★</span>
+                        <span class="ml-2 text-sm text-gray-600">(3.1/5)</span>
+                    </div>
+                    <div class="flex items-center mb-4">
+                        <input type="number" min="1" value="1" class="border p-2 mr-2 w-16 text-center">
+                        <button class="bg-blue-500 text-white px-4 py-2 rounded">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Optional: Any additional JavaScript can be added here.
+    </script>
+</body>
+</html>
