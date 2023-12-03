@@ -1,87 +1,120 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beer Search</title>
+    <title>Beer Selection</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .star-rating {
-            display: inline-block;
-            font-size: 1.5rem;
-            font-family: Times; /* Fallback to Times if necessary */
-            line-height: 1;
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FFE08C;
+            
+        }
+        .transf{
+            opacity: 0;
+            transform: translateY(20px); /* 초기에는 20px 아래로 이동한 상태로 설정 */
+            transition: opacity 0.3s ease-in-out, transform 0.5s ease-in-out; /* 1초 동안 천천히 나타나게 설정 */
+        }
+        .transf.show {
+            opacity: 1;
+            transform: translateY(0); /* 로딩이 완료되면 다시 원래 위치로 이동 */
+        }
+        .star-rating input {
+            display: none;
+        }
+        .star-rating label {
+            color: #ddd;
+            float: right;
+        }
+        .star-rating input:checked ~ label,
+        .star-rating label:hover,
+        .star-rating label:hover ~ label {
+            color: #f29354;
+        }
+        .star-rating label:hover,
+        .star-rating label:hover ~ label {
             cursor: pointer;
         }
-        .star-rating .star {
-            color: #d4d4d4;
+        .search-button{
+            background-color: #f29354;
+            color: #FFF;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
         }
-        .star-rating .star.selected {
-            color: #f59e0b;
+        .hover-bg-change:hover {
+            background-color: #f36c6c;
         }
+        
     </style>
 </head>
-<body class="bg-white text-gray-800">
-    <div class="container mx-auto p-8">
-        <div class="flex flex-col items-center">
-            <!-- Logo and Image Placeholder -->
-            <div class="w-24 h-24 bg-gray-300 rounded-full mb-4">
-                <img src="../static/image/main_img.png">
+<body>
+    <div class="flex justify-center items-center h-screen">
+        <div class="transf bg-white shadow-lg p-8 rounded-lg w-1/2">
+            <div class="flex flex-col items-center">
+                <!-- Logo placeholder -->
+                <div class="logo-container w-24 h-24 rounded-full mb-3">
+                    <img src="../static/image/main_img.png" alt="Logo" class="logo rounded-full">
+                </div>
+                <div class="border-t-2 border-transparent">
+                    <div class="text-center">
+        
+                        <!-- Dropdown for Beer Types -->
+                        <div class="mb-4">
+                            <label for="beerType" class="block text-sm font-medium text-gray-700">주종</label>
+                            <select id="beerType" name="beerType" class="text-center mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                <option>Soju</option>
+                                <!-- Add 11 types of beer here -->
+                                <option>Beer</option>
+                                <option>Makgeollc</option>
+                                <option>Wine</option>
+                                <option>Sake</option>
+                                <option>Whiskey</option>
+                                <option>Teguila</option>
+                                <option>Brandy</option>
+                                <option>Gin</option>
+                                <option>Rum</option>
+                                <option>ETC</option>
+                                <!-- ... up to Type 11 -->
+                            </select>
+                        </div>
+        
+                        <!-- Text Input for Beer Name -->
+                        <div class="mb-4">
+                            <label for="beerName" class="block mb-3 text-sm font-medium text-gray-700">술 이름</label>
+                            <input type="text" id="beerName" name="beerName" class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        </div>
+        
+                        <!-- Text Input for Price -->
+                        <div class="mb-4">
+                            <label for="price" class="block mb-3 text-sm font-medium text-gray-700">가격</label>
+                            <input type="text" placeholder="Min price" class="border p-2 rounded-md shadow-sm">
+                            <input type="text" placeholder="Max price" class="border p-2 rounded-md shadow-sm">  
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="rating" class="block mb-1 text-sm font-medium text-gray-700">평점</label>
+                            <div class="star-rating flex justify-center">
+                                <input class="star" type="radio" id="star1" name="rating" value="1"><label for="star1">&#9733;</label>
+                                <input class="star" type="radio" id="star2" name="rating" value="2"><label for="star2">&#9733;</label>
+                                <input class="star" type="radio" id="star3" name="rating" value="3"><label for="star3">&#9733;</label>
+                                <input class="star" type="radio" id="star4" name="rating" value="4"><label for="star4">&#9733;</label>
+                                <input class="star" type="radio" id="star5" name="rating" value="5"><label for="star5">&#9733;</label>
+                            </div>
+                        </div>
+                        <button  onclick="search()" class="search-button hover-bg-change text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full transform transition-colors duration-300">
+                            Search
+                        </button>
+                        
+                </div>
             </div>
-
-            <!-- Faint line to divide sections -->
-            <div class="border-t border-gray-200 w-full my-4"></div>
-
-            <!-- Dropdown for Beer Types -->
-            <div class="mb-4">
-                <label for="beerType" class="block text-sm font-medium text-gray-700">주종</label>
-                <select id="beerType" name="beerType" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-                    <option>Soju</option>
-                    <!-- Add 11 types of beer here -->
-                    <option>Beer</option>
-                    <option>Makgeollc</option>
-                    <option>Wine</option>
-                    <option>Sake</option>
-                    <option>Whiskey</option>
-                    <option>Teguila</option>
-                    <option>Brandy</option>
-                    <option>Gin</option>
-                    <option>Rum</option>
-                    <option>ETC</option>
-                    <!-- ... up to Type 11 -->
-                </select>
-            </div>
-
-            <!-- Text Input for Beer Name -->
-            <div class="mb-4">
-                <label for="beerName" class="block text-sm font-medium text-gray-700">술 이름</label>
-                <input type="text" id="beerName" name="beerName" class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-            </div>
-
-            <!-- Text Input for Price -->
-            <div class="mb-4">
-                <label for="price" class="block text-sm font-medium text-gray-700">가격</label>
-                <input type="text" id="price" name="price" class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-            </div>
-
-            <!-- Star Rating -->
-            <div class="star-rating mb-4">
-                <span class="star">&#9733;</span>
-                <span class="star">&#9733;</span>
-                <span class="star">&#9733;</span>
-                <span class="star">&#9733;</span>
-                <span class="star">&#9733;</span>
-            </div>
-
-            <!-- Search Button -->
-            <button onclick="search()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-                Search
-            </button>
         </div>
     </div>
-
     <script>
+        setTimeout(function () {
+            document.querySelector('.transf').classList.add('show');
+        }, 500);
         // JavaScript for star rating interaction
         document.querySelectorAll('.star-rating .star').forEach((star, index, stars) => {
             star.addEventListener('click', () => {
