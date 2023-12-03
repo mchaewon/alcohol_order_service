@@ -9,10 +9,19 @@
         .btn-hover:hover {
             background-color: #f36c6c;
         }
+        .transf{
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s ease, transform 0.5s ease;
+          }
+          .transf.show{
+            opacity: 1;
+            transform: translateY(0);
+          }
     </style>
 </head>
 <body class="bg-[#FFE08C] flex items-center justify-center h-screen">
-    <div class="bg-white p-7 rounded-lg shadow-lg w-180">
+    <div class="transf bg-white p-7 rounded-lg shadow-lg w-180">
         <div class="flex flex-col items-center mb-4">
             <div class="w-16 h-16 bg-gray-300 rounded-full mb-4">
                 <img class="logo w-full h-full" src="../static/image/main_img.png" alt="logo">
@@ -34,7 +43,9 @@
         </form>
     </div>
     <script>
-        // Add your JavaScript here if needed
+        setTimeout(function() {
+            document.querySelector('.transf').classList.add('show');
+          }, 500);
     </script>
 </body>
 </html>
