@@ -3,15 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My page</title>
+    <title>Order List</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'rate-star': '#fbbf24', // Custom color for the rating stars
+                    }
+                }
+            }
+        }
+    </script>
     <style>
         body {
             font-family: 'Open Sans', sans-serif;
         }
-        .hover-bg-change:hover {
-            background-color: #e2e8f0; /* light gray */
+        .dotted-line {
+            border-top: 1px dotted #999; /* 점선 스타일 및 색상 지정 */
+            width: 100%; /* 점선의 가로 길이를 조정할 수 있습니다. */
+            margin: 20px auto; /* 필요에 따라 위치 조정 */
+        }
+        .rate-button:hover {
+            background-color: #e5e7eb; /* Light gray background on hover */
+        } 
+        .star-rating {
+            unicode-bidi: bidi-override;
+            direction: rtl;
+        }
+        .star-rating input {
+            display: none;
+        }
+        .star-rating label {
+            color: #ccc;
+            font-size: 24px;
+            padding: 0;
+            cursor: pointer;
+            -webkit-transition: color 0.2s;
+            transition: color 0.2s;
+        }
+        .star-rating label:hover,
+        .star-rating label:hover ~ label,
+        .star-rating input:checked ~ label {
+            color: #fbbf24;
         }
     </style>
 </head>
@@ -21,16 +58,142 @@
     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 flex">
         <!-- 메뉴 박스 크게 하기 -->
         {% include 'lib/mymenu.html' %}
-        <main class="w-3/4 h-3/4">
-            
+
+        <main class="w-3/4 h-3/4 bg-white p-5 shadow-md rounded-lg">
+            <div class="p-5">
+                <h1 class="text-2xl font-bold mb-5">Order List</h1>
+                <!-- order list 동적으로 받아오기 -->
+                <div class="space-y-6">
+                    <!-- 1 -->
+                    <div class="bg-white p-4 mb-4 shadow rounded">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="font-bold">Order ID 2012</span>
+                            <span>2023.11.30</span>
+                        </div>
+                        <!--1-1-->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="w-16 h-16 bg-gray-300 mr-4">
+                                    <img src="https://via.placeholder.com/100" alt="Product" class="h-10 w-10 rounded-full">
+                                </div> <!-- Alcohol image placeholder -->
+                                <div>
+                                    <div class="font-bold">CASS_LIGHT_355</div>
+                                    <div>beer</div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div>2 x 4,200</div>
+                                <div class="font-bold">8,400원</div>
+                                <button onclick="openRateModal()" class="rate-button mt-2 px-4 py-2 border">Rate</button>
+                            </div>
+                        </div>
+                        <hr class="dotted-line">
+                        <!--1-2-->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="w-16 h-16 bg-gray-300 mr-4">
+                                    <img src="https://via.placeholder.com/100" alt="Product" class="h-10 w-10 rounded-full">
+                                </div> <!-- Alcohol image placeholder -->
+                                <div>
+                                    <div class="font-bold">CASS_LIGHT_355</div>
+                                    <div>beer</div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div>2 x 4,200</div>
+                                <div class="font-bold">8,400원</div>
+                                <button onclick="openRateModal()" class="rate-button mt-2 px-4 py-2 border">Rate</button>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+
+                <div class="space-y-6">
+                    <!-- 2 -->
+                    <div class="bg-white p-4 mb-4 shadow rounded">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="font-bold">Order ID 2012</span>
+                            <span>2023.11.30</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="w-16 h-16 bg-gray-300 mr-4">
+                                    <img src="https://via.placeholder.com/100" alt="Product" class="h-10 w-10 rounded-full">
+                                </div> <!-- Alcohol image placeholder -->
+                                <div>
+                                    <div class="font-bold">CASS_LIGHT_355</div>
+                                    <div>beer</div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div>2 x 4,200</div>
+                                <div class="font-bold">8,400원</div>
+                                <button onclick="openRateModal()" class="rate-button mt-2 px-4 py-2 border">Rate</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+
+            </div>    
+
         </main>
     </div>
 
+    <!-- Rating Modal -->
+    <div id="rateModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+            <div class="mt-3 text-center">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">Rate</h3>
+                <div class="mt-2 px-7 py-3">
+                    <div class="star-rating">
+                        <input type="radio" id="5-stars" name="rating" value="5" /><label for="5-stars" class="star">&#9733;</label>
+                        <input type="radio" id="4-stars" name="rating" value="4" /><label for="4-stars" class="star">&#9733;</label>
+                        <input type="radio" id="3-stars" name="rating" value="3" /><label for="3-stars" class="star">&#9733;</label>
+                        <input type="radio" id="2-stars" name="rating" value="2" /><label for="2-stars" class="star">&#9733;</label>
+                        <input type="radio" id="1-star" name="rating" value="1" /><label for="1-star" class="star">&#9733;</label>
+                    </div>
+                </div>
+                <div class="items-center px-4 py-3">
+                    <button id="okBtn" onclick="submitRating()" class="px-4 py-2 bg-blue-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                        Submit
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         // Optional: Any additional JavaScript can be added here.
+        function openRateModal() {
+            document.getElementById('rateModal').classList.remove('hidden');
+        }
+
+        function closeRateModal() {
+            document.getElementById('rateModal').classList.add('hidden');
+            // Here you would also handle the logic to update the rating in the original window
+        }
+        function submitRating() {
+            // Retrieve the selected rating
+            const rating = document.querySelector('input[name="rating"]:checked').value;
+
+            // Update the rating on the original page (replace this with your logic)
+            const ratingElement = document.createElement('div');
+            ratingElement.className = 'flex items-center';
+
+            // Fill the appropriate number of stars with yellow color
+            for (let i = 1; i <= 5; i++) {
+                const star = document.createElement('span');
+                star.innerHTML = '★';
+                star.style.color = i <= rating ? '#fbbf24' : '#ccc';
+                ratingElement.appendChild(star);
+            }
+
+            // Replace the rate button with the displayed rating
+            const rateButton = document.querySelector('.rate-button');
+            rateButton.parentNode.replaceChild(ratingElement, rateButton);
+
+            // Close the modal
+            closeRateModal();
+        }
     </script>
 </body>
 </html>
-
-
-
