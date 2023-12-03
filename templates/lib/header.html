@@ -7,10 +7,10 @@
           </div>
           <!-- 메뉴 오른쪽 정렬 -->
           <nav class="hidden md:flex space-x-4">
-              <a href="#" class="text-gray-600 hover:text-gray-900">Notice</a>
-              <a href="#" class="text-gray-600 hover:text-gray-900">Find</a>
-              <a href="#" class="text-gray-600 hover:text-gray-900">Store</a>
-              <a href="#" class="text-gray-600 hover:text-gray-900">MyPage</a>
+              <a href="{{ url_for('main.notice') }}" class="text-gray-600 hover:text-gray-900">Notice</a>
+              <a href="{{ url_for('main.find') }}" class="text-gray-600 hover:text-gray-900">Find</a>
+              <a href="{{ url_for('main.store') }}" class="text-gray-600 hover:text-gray-900">Store</a>
+              <a href="{{ url_for('order.mypage') }}" class="text-gray-600 hover:text-gray-900">MyPage</a>
               <a href="#" class="text-gray-600 hover:text-gray-900">Logout</a>
           </nav>
       </div>

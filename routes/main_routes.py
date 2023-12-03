@@ -43,3 +43,15 @@ def search_condition():
 @main_bp.route('/cover')
 def cover():
     return render_template('cover.html')
+
+@main_bp.route('/notice')
+def notice():
+    return render_template('notice.html')
+
+@main_bp.route('/find')
+def find():
+    return render_template('search.html')
+
+@main_bp.route('/store')
+def store():
+    return render_template('store.html')
