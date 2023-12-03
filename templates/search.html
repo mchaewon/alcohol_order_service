@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beer Search</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .star-rating {
+            display: inline-block;
+            font-size: 1.5rem;
+            font-family: Times; /* Fallback to Times if necessary */
+            line-height: 1;
+            cursor: pointer;
+        }
+        .star-rating .star {
+            color: #d4d4d4;
+        }
+        .star-rating .star.selected {
+            color: #f59e0b;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800">
+    <div class="container mx-auto p-8">
+        <div class="flex flex-col items-center">
+            <!-- Logo and Image Placeholder -->
+            <div class="w-24 h-24 bg-gray-300 rounded-full mb-4">
+                <img src="../static/image/main_img.png"></img>
+            </div>
+
+            <!-- Faint line to divide sections -->
+            <div class="border-t border-gray-200 w-full my-4"></div>
+
+            <!-- Dropdown for Beer Types -->
+            <div class="mb-4">
+                <label for="beerType" class="block text-sm font-medium text-gray-700">주종</label>
+                <select id="beerType" name="beerType" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                    <option>Soju</option>
+                    <!-- Add 11 types of beer here -->
+                    <option>Beer</option>
+                    <option>Makgeollc</option>
+                    <option>Wine</option>
+                    <option>Sake</option>
+                    <option>Whiskey</option>
+                    <option>Teguila</option>
+                    <option>Brandy</option>
+                    <option>Gin</option>
+                    <option>Rum</option>
+                    <option>ETC</option>
+                    <!-- ... up to Type 11 -->
+                </select>
+            </div>
+
+            <!-- Text Input for Beer Name -->
+            <div class="mb-4">
+                <label for="beerName" class="block text-sm font-medium text-gray-700">술 이름</label>
+                <input type="text" id="beerName" name="beerName" class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+
+            <!-- Text Input for Price -->
+            <div class="mb-4">
+                <label for="price" class="block text-sm font-medium text-gray-700">가격</label>
+                <input type="text" id="price" name="price" class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+
+            <!-- Star Rating -->
+            <div class="star-rating mb-4">
+                <span class="star selected">&#9733;</span>
+                <span class="star selected">&#9733;</span>
+                <span class="star selected">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+            </div>
+
+            <!-- Search Button -->
+            <button onclick="window.location.href='results.html'" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                Search
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for star rating interaction
+        document.querySelectorAll('.star-rating .star').forEach((star, index, stars) => {
+            star.addEventListener('click', () => {
+                stars.forEach((otherStar, otherIndex) => {
+                    if (otherIndex <= index) {
+                        otherStar.classList.add('selected');
+                    } else {
+                        otherStar.classList.remove('selected');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
