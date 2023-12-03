@@ -1,5 +1,5 @@
 # routes/main_routes.py
-from flask import render_template, redirect, url_for, session, Blueprint, request
+from flask import render_template, redirect, url_for, session, Blueprint, request, jsonify
 from database.db import Oracledb
 
 main_bp = Blueprint('main', __name__)
@@ -8,15 +8,29 @@ oracle = Oracledb()
 @main_bp.route('/')
 def main():
     if 'userid' in session:
-        query = 'SELECT * FROM ALCOHOL'
+        type_param = request.args.get('type', default='all', type=str)
+        if type_param == 'all':
+            query = "SELECT A.Name, A.Price, A.Alcohol_degree, A.Type, round(avg(P.Star_rating),1) AS star FROM ALCOHOL A, POINT P WHERE A.Alcohol_ID=P.Alcohol_ID group by A.Name, A.Price, A.Alcohol_degree, A.Type"
+        elif type_param == 'etc':
+            l = "('soju', 'beer', 'makgeolli', 'wine', 'sake', 'whiskey', 'tequila', 'brandy', 'gin', 'rum')"
+            query = f"SELECT A.Name, A.Price, A.Alcohol_degree, A.Type, ROUND(AVG(P.Star_rating), 1) AS Avg_Star_Rating FROM ALCOHOL A JOIN POINT P ON A.Alcohol_ID = P.Alcohol_ID WHERE lower(A.Type) NOT IN {l} GROUP BY A.Name, A.Price, A.Alcohol_degree, A.Type"
+        else:
+            query = f"SELECT A.Name, A.Price, A.Alcohol_degree, A.Type, round(avg(P.Star_rating),1) FROM ALCOHOL A, POINT P WHERE A.Alcohol_ID=P.Alcohol_ID and type like '%{type_param}%' group by A.Name, A.Price, A.Alcohol_degree, A.Type"
+        print(query)
         result = oracle.select(query, 12)
+
         return render_template('index.html', data=result)
     else:
         return redirect(url_for('auth.login'))
+    
 
 @main_bp.route('/search')
 def search():
     return render_template('search.html')
+
+@main_bp.route('/sample')
+def sample():
+    return render_template('sample.html')
 
 @main_bp.route('/search_condition', methods=['GET'])
 def search_condition():
