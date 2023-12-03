@@ -1,21 +1,20 @@
 # routes/main_routes.py
-from flask import render_template, redirect, url_for, session
-from app import app, oracle
+from flask import render_template, redirect, url_for, session, Blueprint
+from database.db import Oracledb
 
-@app.route('/')
+main_bp = Blueprint('main', __name__)
+oracle = Oracledb()
+
+@main_bp.route('/')
 def main():
     if 'userid' in session:
-        query = 'select * from ALCOHOL'
+        query = 'SELECT * FROM ALCOHOL'
         result = oracle.select(query, 12)
         return render_template('index.html', data=result)
     else:
-        return redirect(url_for('login'))
+        return redirect(url_for('auth.login'))
 
-@app.route('/logout')
-def logout():
-    session.pop('userid', None)
-    return redirect(url_for('login'))
 
-@app.route('/cover')
+@main_bp.route('/cover')
 def cover():
     return render_template('cover.html')
