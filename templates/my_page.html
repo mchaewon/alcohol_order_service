@@ -26,38 +26,31 @@
 
     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 flex">
         <!-- 메뉴 박스 크게 하기 -->
-        <aside class="w-1/4 pr-4 h-3/4">
-            <ul class="bg-white shadow-md rounded-lg p-4 sticky top-6 text-center">
-                <li class="py-2"><a href="#" class="hover:text-blue-500">My page</a></li>
-                <li class="py-2"><a href="#" class="hover:text-blue-500">Order List</a></li>
-                <li class="py-2"><a href="#" class="hover:text-blue-500">Cart</a></li>
-                <li class="py-2"><a href="#" class="hover:text-blue-500">Notcie</a></li>
-                <li class="py-2"><a href="#" class="hover:text-blue-500">Store</a></li>
-            </ul>
-        </aside>
+        {% include 'lib/mymenu.html' %}
         <main class="w-3/4 h-3/4">
             <div class="bg-white p-6 rounded-lg profile-card max-w-md w-full h-full">
                 <div class="grid grid-cols-2 gap-4">
                     <div class="font-semibold">Name</div>
-                    <div>Eunzung Kim</div>
+                    <div>{{data[1]}}</div>
     
                     <div class="font-semibold">ID</div>
-                    <div>ezzkim</div>
+                    <div>{{data[0]}}</div>
     
                     <div class="font-semibold">Phone</div>
-                    <div>010-8232-0418</div>
+                    <div>{{data[3]}}</div>
     
                     <div class="font-semibold">Birth</div>
-                    <div>2000.04.18</div>
+                    <div>{{data[4]}}</div>
     
                     <div class="font-semibold">Address</div>
-                    <div>address</div>
+                    <div>{{data[5]}}</div>
                 </div>
-                <div class="mt-6">
-                    <button class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                <div class="mt-6 flex">
+                    <a href="{{ url_for('order.orderlist') }}" class="flex-grow bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline text-center">
                         ORDER LIST
-                    </button>
+                    </a>
                 </div>
+                
             </div>
         </main>
     </div>

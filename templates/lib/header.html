@@ -1,18 +1,26 @@
+
+
 <header class="bg-white shadow-md">
   <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
       <div class="flex items-center space-x-4">
           <!-- 로고 이미지 크기 조정 -->
           <div class="flex items-center">
-              <img src="../static/image/main_img.png" alt="Logo" class="mr-2">
+            <img src="../static/image/main_img.png" alt="Logo" class="mr-2" id="logoImage" style="cursor: pointer;">
           </div>
           <!-- 메뉴 오른쪽 정렬 -->
           <nav class="hidden md:flex space-x-4">
-              <a href="#" class="text-gray-600 hover:text-gray-900">Notice</a>
-              <a href="#" class="text-gray-600 hover:text-gray-900">Find</a>
-              <a href="#" class="text-gray-600 hover:text-gray-900">Store</a>
-              <a href="#" class="text-gray-600 hover:text-gray-900">MyPage</a>
-              <a href="#" class="text-gray-600 hover:text-gray-900">Logout</a>
+              <a href="{{ url_for('main.notice', page_num=1) }}" class="text-gray-600 hover:text-gray-900">Notice</a>
+              <a href="{{ url_for('main.find') }}" class="text-gray-600 hover:text-gray-900">Find</a>
+              <a href="{{ url_for('main.store', page_num=1) }}" class="text-gray-600 hover:text-gray-900">Store</a>
+              <a href="{{ url_for('order.mypage') }}" class="text-gray-600 hover:text-gray-900">MyPage</a>
+              <a href="{{ url_for('auth.logout') }}" class="text-gray-600 hover:text-gray-900">Logout</a>
           </nav>
       </div>
   </div>
 </header>
+
+<script>
+    document.getElementById('logoImage').addEventListener('click', function() {
+        window.location.href = "{{ url_for('main.main') }}";
+    });
+</script>

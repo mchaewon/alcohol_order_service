@@ -13,6 +13,23 @@ class Oracledb:
     def select(self, query, size):
         self.cursor.execute(query)
         return self.cursor.fetchmany(size)
+    
+    def selectpage(self, query, size, page):
+        self.cursor.execute(query)
+        data = self.cursor.fetchmany()
+        total_count = len(data)
+        page = int(page)
+        total_pages = (total_count // size) + (1 if total_count % size > 0 else 0)
+        start_idx = (page - 1) * size
+        end_idx = start_idx + size
+        print(start_idx, end_idx)
+        result = data[start_idx: end_idx+1]
+        return total_pages, result
+        
+    
+    def selectall(self, query):
+        self.cursor.execute(query)
+        return self.cursor.fetchmany()
 
     def authenticate_user(self, userid, password):
         query = f"SELECT count(*) FROM CUSTOMER WHERE Customer_ID='{userid}' AND Password='{password}'"
