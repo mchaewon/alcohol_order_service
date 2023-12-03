@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import render_template, request, redirect, url_for, flash
+from flask import render_template, request, redirect, url_for, session
 
 import cx_Oracle
 
@@ -10,18 +10,26 @@ app.secret_key = 'your_secret_key'
 sample user id / pw
 JzUx2510 / nMczX8294
 TdlZ4221 / hotly4729
-
 '''
 
 class user:
     def __init__(self):
         self.userid = None
+        self.phonenum = None
+        self.name = None
+        self.birth = None
+        self.address = None
     
-    def login(self, userid):
-        self.userid = userid
-    
-    def logout(self):
-        self.userid = None
+    def getcurrentuserinfo(self):
+        self.userid = session['userid']
+        info = oracle.getuserinfo(self.userid)
+        self.name = info[2]
+        self.phonenum = info[3]
+        self.birth = info[4]
+        self.address = info[5]
+        return self.userid
+        
+
 
 class oracledb:
     def __init__(self):
@@ -41,7 +49,12 @@ class oracledb:
         query = f"SELECT count(*) FROM CUSTOMER WHERE Customer_ID='{userid}' AND Password='{password}'"
         self.cursor.execute(query)
         result = self.cursor.fetchone()
-        print(result)
+        return result[0] > 0
+    
+    def getuserinfo(self, userid):
+        query = f"select * from CUSTOMER where Customer_ID = '{userid}'"
+        self.cursor.execute(query)
+        result = self.cursor.fetchone()
         return result
 
     def closedb(self):
@@ -49,27 +62,39 @@ class oracledb:
 
 @app.route('/')
 def main():
-    query = 'select * from ALCOHOL'
-    result = oracle.select(query, 12)
-    return render_template('index.html', data = result)
+    if 'userid' in session:
+        query = 'select * from ALCOHOL'
+        result = oracle.select(query, 12)
+        return render_template('index.html', data=result)
+    else:
+        return redirect(url_for('login'))
 
 
 @app.route('/login')
 def login():
     return render_template('signin.html')
 
+@app.route('/signup')
+def signup():
+    return render_template('signup.html')
+
 @app.route('/login_process_form', methods=['POST'])
 def login_process_form():
     if request.method == 'POST':
         user_id = request.form.get('id')
         password = request.form.get('password')
-        if oracle.authenticate_user(user_id, password)[0]:
-            currentuser.login(id)
+        if oracle.authenticate_user(user_id, password):
+            session['userid'] = user_id
             return redirect(url_for('main'))
         else:
-            flash("ID 또는 비밀번호가 틀립니다.", 'error')
             return redirect(url_for('login'))
+
+@app.route('/logout')
+def logout():
     
+    session.pop('userid', None)
+    return redirect(url_for('login'))    
+
 @app.route('/cover')
 def cover():
     return render_template('cover.html')
