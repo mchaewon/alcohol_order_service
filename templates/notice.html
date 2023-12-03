@@ -35,22 +35,32 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% if data %}
+                        {% for row in data %}
                         <!-- Placeholder for dynamic content -->
                         <tr>
-                            <td class="border px-4 py-2">Hello DB</td>
-                            <td class="border px-4 py-2">ezzkim</td>
-                            <td class="border px-4 py-2">12.03</td>
+                            <td class="border px-4 py-2">{{row[3]}}</td>
+                            <td class="border px-4 py-2">{{row[1]}}</td>
+                            <td class="border px-4 py-2">{{row[2]}}</td>
                         </tr>
+
+                        {% endfor %}
+                        {% else %}  
+                        <p>No data available</p>
+                        {% endif %}
+
                         <!-- More rows would be added here -->
                     </tbody>
                 </table>
             </div>
             <!-- Pagination -->
             <div class="flex justify-center p-4 border-t">
+                {% for x in range(page) %}
                 <div class="flex items-center space-x-1">
-                    <a href="#" class="px-3 py-1 border rounded hover:bg-gray-200">1</a>
+                    <a href="{{ url_for('main.notice', page_num=x+1) }}" class="px-4 py-2 border rounded hover:bg-gray-200"> {{x+1}} </a>
                     <!-- More pagination links would be added here -->
                 </div>
+                {% endfor %}
             </div>
         </main>
     </div>
