@@ -43,6 +43,8 @@
                 <div class="grid grid-cols-3 gap-4">
                     {% if data %}
                     {% for row in data %}
+                        <a href="{{ url_for('main.detail', alcohol_id=row[5]) }}">
+
                         <div class="card bg-gray-200 rounded-lg p-4 text-center">
                             <div style="text-align:center">
                                 <img src="https://via.placeholder.com/150" alt="Alcohol" class="rounded-md mb-2">
@@ -51,8 +53,9 @@
                             <div class="text-sm">{{row[3]}} {{row[2
                                 ]}}%</div>
                             <div class="font-semibold">{{row[0]}}</div>
-                            <div class="text-sm">{{row[1]}}원</div>
-                            <div class="text-sm">({{row[4]}}/5)</div>
+                            <div class="text-sm">{{row[1]}}₩</div>
+                            <div class="text-yellow-400 text-lg" style="display: inline-block;">{% for _ in range(row[4]|int) %} ★ {% endfor %}</div>
+                            <div class="text-sm" style="display: inline-block;">({{ row[4] }}/5)</div>
                         </div>
                     {% endfor %}
                     {% else %}  
@@ -76,8 +79,6 @@
                 });
             });
         });
-    
-        
     </script>
 </body>
 </html>
