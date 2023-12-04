@@ -27,17 +27,19 @@
 
         <main class="w-3/4">
             <div class="flex">
+                {% if data %}
                 <!-- Product Image -->
                 <div class="w-1/2">
-                    <img src="https://via.placeholder.com/400" alt="Beer" class="rounded-lg shadow-lg">
+                    <div style="text-align: center; background-color: white; padding: 10px;" class="rounded-lg shadow-lg">
+                        <img src="../static/alcohol_image/{{ data[6] }}" alt="Beer"  style="width: auto; height: 490px; display: inline-block;" onerror="this.src='../static/image/main_img.png';">
+                    </div>
                 </div>
 
                 <!-- Product Info -->
-                {% if data %}
                 <div class="w-1/2 pl-10">
                     <p class="text-gray-600 mb-4">{{data[3]}} {{data[2]}}%</p>
                     <h2 class="text-2xl font-semibold mb-2">{{data[0]}}</h2>
-                    <p class="text-gray-600 mb-4">{{data[1]}}₩</p>
+                    <p class="text-gray-600 mb-4">₩ {{data[1]}}</p>
                     <div class="flex items-center mb-4">
                         <span class="text-yellow-400 text-lg">{% for _ in range(data[4]|int) %}
                             ★
