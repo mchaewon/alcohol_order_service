@@ -40,23 +40,31 @@
             transform: translateX(-50%);
             cursor: pointer;
         }
+        .today-recommendation {
+            font-size: 40px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            position: absolute; /* 절대 위치 설정 */
+            top: -80px; /* 위로 30px 이동 */
+        }
+        
     </style>
 </head>
 <body class="h-screen flex items-center justify-center">
     <div class="circ rounded-full bg-white p-10 shadow-xl pop flex flex-col items-center justify-center">
+        <h2 class="today-recommendation mb-5">오늘의 추천 술</h2>
         <div class="mb-5">
             <div class="drink-image w-35 h-35 bg-gray-300 rounded-md items-center justify-center overflow-hidden">
-                <img src="../static/alcohol_image/akashitaigenshu.png" alt="alcohol" width="130" height="210"></img>
+                <img src="../static/alcohol_image/{{data[6]}}" alt="alcohol" style="width:auto; height:200px;" onerror="this.src='../static/image/main_img.png';">
             </div>
         </div>
         <div class="mt-2">
-            <p class="text-center text-xl font-semibold mt-4">오늘의 추천 술</p>
+            <p class="text-center text-xl font-semibold mt-4">{{data[0]}}</p>
             <!-- 술 맛을 설명함. 디비에서 불러옴. -->
-            <p class="text-center text-xl font-semibold mt-4">청량하고 어쩌고 저쩌고</p>
-            
+            <p class="text-center text-xxl font-semibold mt-7">{{data[7]}}</p>
         </div>
-        
     </div>
+
     <div class="scroll-indicator mt-10">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 animate-bounce text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <p class="text-center text-xl font-semibold">추천 술 사러가기</p>
@@ -70,7 +78,7 @@
             document.body.style.transition = 'opacity 0.5s';
             document.body.style.opacity = '0'; // Fade out the current page
             setTimeout(function() {
-                window.location.href = "uni_alcohol"; // Replace with the actual path
+                window.location.href = "detail/{{data[8]}}"; // Replace with the actual path
             }, 500);
         });
     </script>

@@ -30,6 +30,7 @@
                 <!-- Search and filters -->
                 <div class="flex items-center space-x-3 mb-5">
                     <form id="searchForm" action="{{ url_for('main.search_condition') }}" method="GET">
+                        <input type="hidden" name="type" value="search">
                         <input type="hidden" name="beertype" value="{{ status }}">
                         <input type="text" name="beername" placeholder="Search alcohol name" class="border p-2">
                         <button onclick="submit" class="px-2 py-2 bg-gray-200 rounded" >🔍</button>
@@ -52,7 +53,7 @@
                         <div class="card bg-gray-200 rounded-lg p-4 text-center">
                             <div style="text-align: center; background-color: white; padding: 10px;">
                                 <div style="text-align:center">
-                                    <img src="../static/alcohol_image/{{ row[6] }}" alt="Alcohol" class="rounded-md mb-2"  style="width: auto; height: 250px;display: inline-block;" onerror="this.src='../static/image/main_img.png';">
+                                    <img src="../static/alcohol_image/{{ row[6] }}" alt="Alcohol" class="rounded-md mb-2"  style="width: auto; height: 250px; display: inline-block;" onerror="this.src='../static/image/main_img.png';">
                                 </div>
                             </div>
                             

@@ -119,6 +119,14 @@ class Oracledb:
             print(f"Error during insert: {e}")
             return False
         
+    def alcoholinfo(self, name):
+        query = f"select taste, Alcohol_ID from alcohol where Name= '{name}'"
+        self.cursor.execute(query)
+        result = self.cursor.fetchone()
+        print(result)
+        return result
+
+        
     def search(self, info):
         #info : [beer_type, beer_name, minprice, maxprice, star]
         # lower(A.Type) NOT IN {l} 
@@ -127,9 +135,9 @@ class Oracledb:
         print(info)
         if info[0] == 'etc':
             wherequery.append(f"lower(A.type) not in {l}")
-        elif info[0] != 'all':
+        elif info[0].lower() != 'all':
             info[0].lower()
-            wherequery.append(f"lower(A.type) = '{info[0]}'")
+            wherequery.append(f"lower(A.type) = '{info[0].lower()}'")
         
         if len(info[1]) != 0:
             info[1].lower()
@@ -141,7 +149,8 @@ class Oracledb:
             info[3] = 100000000
         
         wherequery.append(f"A.Price between {info[2]} and {info[3]}")
-
+        if info[4] == None:
+            info[4] = 1
         wherequery.append(f"P.Star_rating >= {info[4]}")
         wq = ""
         if len(wherequery) > 0:

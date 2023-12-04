@@ -14,6 +14,13 @@ def start():
 def aftersignin():
     return render_template('after_signin.html')
 
+@main_bp.route('/random')
+def random():
+    if 'result_data' in session:
+        result_data = session['result_data']
+        session.pop('result_data', None)
+    return render_template('random.html', data=result_data)
+
 @main_bp.route('/index')
 def main():
     if 'result_data' in session:
@@ -50,17 +57,28 @@ def sample():
 
 @main_bp.route('/search_condition', methods=['GET'])
 def search_condition():
+    type = request.args.get('type')
     beer_type = request.args.get('beertype')
     beer_name = request.args.get('beername')
     minprice = request.args.get('minprice')
     maxprice = request.args.get('maxprice')
     star = request.args.get('starRating')
+
     condition = [beer_type, beer_name, minprice, maxprice, star]
-
+   
     result = oracle.search(condition)
-    session['result_data'] = result
+    if type == 'recommend':
+        additioninfo = oracle.alcoholinfo(result[0][0])
+        tmp = list(result[0])
+        print("info: ", additioninfo)
+        tmp.append(additioninfo[0])
+        tmp.append(additioninfo[1])
+        session['result_data'] = tmp
 
-    return redirect(url_for('main.main'))
+        return redirect(url_for('main.random'))
+    elif type == 'search':
+        session['result_data'] = result
+        return redirect(url_for('main.main'))
 
 @main_bp.route('/cover')
 def cover():
