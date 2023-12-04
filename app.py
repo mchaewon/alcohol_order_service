@@ -3,6 +3,7 @@ from flask import Flask
 from routes.auth_routes import auth_bp
 from routes.main_routes import main_bp
 from routes.order_routes import order_bp
+from routes.manager_routes import manager_bp
 from config import SECRET_KEY
 from datetime import timedelta
 
@@ -13,8 +14,8 @@ def create_app():
     app.config['SESSION_TYPE'] = 'filesystem'  # 파일 시스템에 저장
 
 
-
     app.register_blueprint(auth_bp, url_prefix='/')
+    app.register_blueprint(manager_bp, url_prefix='/')
     app.register_blueprint(main_bp, url_prefix='/')
     app.register_blueprint(order_bp, url_prefix='/')
 

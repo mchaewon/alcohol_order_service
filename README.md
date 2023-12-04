@@ -5,3 +5,4 @@ pip install -r requirements.txt
 
 실행방법
 python run.py
+href="{{ url_for('', page_num=1) }}"
