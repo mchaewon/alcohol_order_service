@@ -32,7 +32,7 @@ def signup_process_form():
         address = request.form.get('address')
         info = [user_id, name, password, phonenum, birth, address]
         if oracle.signup(info):
-            return "Success"
+            return redirect(url_for("auth.login"))
         else:
             return redirect(url_for("auth.signup"))
     else:
@@ -45,7 +45,7 @@ def login_process_form():
         password = request.form.get('password')
         if oracle.authenticate_user(user_id, password):
             session['userid'] = user_id
-            return redirect(url_for('main.main'))
+            return redirect(url_for('main.aftersignin'))
         else:
             return redirect(url_for('auth.login'))
     else:

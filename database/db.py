@@ -1,13 +1,10 @@
 # database/db.py
 import cx_Oracle
+from config import db_config
 
 class Oracledb:
     def __init__(self):
-        db_config = {
-            'user': 'alcohol',
-            'password': 'comp322',
-            'dsn':'localhost:1521/orcl'
-        }
+        
         self.conn = cx_Oracle.connect(**db_config)
         self.cursor = self.conn.cursor()
 
