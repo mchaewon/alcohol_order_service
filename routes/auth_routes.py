@@ -45,6 +45,7 @@ def signup_process_form():
 def login_process_form():
     if request.method == 'POST':
         type = request.form.get('type')
+        print(type)
         if type == 'customer' or type == None:
             user_id = request.form.get('id')
             password = request.form.get('password')
