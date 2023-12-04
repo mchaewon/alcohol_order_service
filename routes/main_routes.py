@@ -1,6 +1,7 @@
 # routes/main_routes.py
 from flask import render_template, redirect, url_for, session, Blueprint, request, jsonify
 from database.db import Oracledb
+import json
 
 main_bp = Blueprint('main', __name__)
 oracle = Oracledb()
@@ -15,7 +16,15 @@ def aftersignin():
 
 @main_bp.route('/index')
 def main():
-    if 'userid' in session:
+    if 'result_data' in session:
+        result_data = session['result_data']
+        session.pop('result_data', None)
+
+        type_param = request.args.get('type', default='all', type=str)
+
+        return render_template('index.html', data=result_data, status = type_param)
+    
+    elif 'userid' in session:
         type_param = request.args.get('type', default='all', type=str)
         if type_param == 'all':
             query = "SELECT A.Name, A.Price, A.Alcohol_degree, A.Type, round(avg(P.Star_rating),1) AS star, A.Alcohol_ID, A.Picture FROM ALCOHOL A, POINT P WHERE A.Alcohol_ID=P.Alcohol_ID group by A.Name, A.Price, A.Alcohol_degree, A.Type, A.Alcohol_ID, A.Picture order by DBMS_RANDOM.VALUE"
@@ -26,7 +35,7 @@ def main():
             query = f"SELECT A.Name, A.Price, A.Alcohol_degree, A.Type, round(avg(P.Star_rating),1), A.Alcohol_ID,  A.Picture FROM ALCOHOL A, POINT P WHERE A.Alcohol_ID=P.Alcohol_ID and type like '%{type_param}%' group by A.Name, A.Price, A.Alcohol_degree, A.Type, A.Alcohol_ID, A.Picture order by DBMS_RANDOM.VALUE"
         result = oracle.selectall(query)
 
-        return render_template('index.html', data=result)
+        return render_template('index.html', data=result, status = type_param)
     else:
         return redirect(url_for('auth.login'))
     
@@ -41,10 +50,16 @@ def sample():
 
 @main_bp.route('/search_condition', methods=['GET'])
 def search_condition():
-    beer_type = request.args.get('beerType')
-    beer_name = request.args.get('beerName')
-    price = request.args.get('price')
-    star = request.args.get('selectedStars')
+    beer_type = request.args.get('beertype')
+    beer_name = request.args.get('beername')
+    minprice = request.args.get('minprice')
+    maxprice = request.args.get('maxprice')
+    star = request.args.get('starRating')
+    condition = [beer_type, beer_name, minprice, maxprice, star]
+
+    result = oracle.search(condition)
+    session['result_data'] = result
+
     return redirect(url_for('main.main'))
 
 @main_bp.route('/cover')
