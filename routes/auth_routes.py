@@ -45,7 +45,8 @@ def signup_process_form():
 def login_process_form():
     if request.method == 'POST':
         type = request.form.get('type')
-        if type == 'customer':
+        print(type)
+        if type == 'customer' or type == None:
             user_id = request.form.get('id')
             password = request.form.get('password')
             if oracle.authenticate_user(user_id, password):
