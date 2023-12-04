@@ -118,6 +118,44 @@ class Oracledb:
             self.conn.rollback()
             print(f"Error during insert: {e}")
             return False
+        
+    def search(self, info):
+        #info : [beer_type, beer_name, minprice, maxprice, star]
+        # lower(A.Type) NOT IN {l} 
+        l = "('soju', 'beer', 'makgeolli', 'wine', 'sake', 'whiskey', 'tequila', 'brandy', 'gin', 'rum')"
+        wherequery = []
+        print(info)
+        if info[0] == 'etc':
+            wherequery.append(f"lower(A.type) not in {l}")
+        elif info[0] != 'all':
+            info[0].lower()
+            wherequery.append(f"lower(A.type) = '{info[0]}'")
+        
+        if len(info[1]) != 0:
+            info[1].lower()
+            wherequery.append(f"lower(A.Name) like '%{info[1]}%'")
+
+        if len(info[2]) == 0:
+            info[2] = 0
+        if len(info[3]) == 0:
+            info[3] = 100000000
+        
+        wherequery.append(f"A.Price between {info[2]} and {info[3]}")
+
+        wherequery.append(f"P.Star_rating >= {info[4]}")
+        wq = ""
+        if len(wherequery) > 0:
+            wq = wherequery[0]
+            for x in wherequery[1:]:
+                wq += " AND "
+                wq += x
+
+        query = f"SELECT A.Name, A.Price, A.Alcohol_degree, A.Type, round(avg(P.Star_rating),1), A.Alcohol_ID,  A.Picture FROM ALCOHOL A, POINT P WHERE A.Alcohol_ID=P.Alcohol_ID and "+wq+" group by A.Name, A.Price, A.Alcohol_degree, A.Type, A.Alcohol_ID, A.Picture order by DBMS_RANDOM.VALUE"
+        print(query)
+        self.cursor.execute(query)
+        result = self.cursor.fetchmany()
+        #print(result)
+        return result
     
     def close_db(self):
         self.cursor.close()
