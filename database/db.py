@@ -1,11 +1,14 @@
 # database/db.py
 import cx_Oracle
 
+cx_Oracle.init_oracle_client(lib_dir="/Volumes/instantclient-basic-macos.x64-19.8.0.0.0dbru")
+
 class Oracledb:
     def __init__(self):
         db_config = {
-            'user': 'alcohol',
+            'user': 'KNU',
             'password': 'comp322',
+            'dsn': 'localhost:1521/xe'
         }
         self.conn = cx_Oracle.connect(**db_config)
         self.cursor = self.conn.cursor()

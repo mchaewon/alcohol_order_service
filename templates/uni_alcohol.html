@@ -1,74 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Uni Alcohol</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        body {
-            font-family: 'Open Sans', sans-serif;
-        }
-        .card {
-            transition: transform 0.2s;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-        }
+      body {
+        font-family: "Open Sans", sans-serif;
+      }
+      .card {
+        transition: transform 0.2s;
+      }
+      .card:hover {
+        transform: translateY(-5px);
+      }
     </style>
-</head>
-<body class="bg-gray-100">
+  </head>
+  <body class="bg-[#FFE08C]">
     {% include 'lib/header.html' %}
 
-    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 flex">
-        <!-- 메뉴 박스 크게 하기 -->
-        {% include 'lib/alcoholmenu.html' %}
-
-        <main class="w-3/4">
-            <div class="flex">
-                <!-- Product Image -->
-                <div class="w-1/2">
-                    <img src="https://via.placeholder.com/400" alt="Beer" class="rounded-lg shadow-lg">
-                </div>
-
-                <!-- Product Info -->
-                {% if data %}
-                <div class="w-1/2 pl-10">
-                    <p class="text-gray-600 mb-4">{{data[3]}}   {{data[2]}}%</p>
-                    <h2 class="text-2xl font-semibold mb-2">{{data[0]}}</h2>
-                    <p class="text-gray-600 mb-4">{{data[1]}}₩</p>
-                    <div class="flex items-center mb-4">
-                        <span class="text-yellow-400 text-lg">{% for _ in range(data[4]|int) %}
-                            ★
-                        {% endfor %}</span>
-                        <span class="ml-2 text-sm text-gray-600">({{data[4]}}/5)</span>
-                    </div>
-                    <div class="flex items-center mb-4">
-                        <input type="number" min="1" value="1" class="border p-2 mr-2 w-16 text-center">
-                        <button class="bg-blue-500 text-white px-4 py-2 rounded">Add to Cart</button>
-                    </div>
-                </div>
-                {% else %}  
-                <p>No data available</p>
-                {% endif %}
+    <section style="display: flex">
+      <!-- 메뉴 박스 크게 하기 -->
+      {% include 'lib/alcoholmenu.html' %}
+      <main class="main_al" style="padding-top: 15vh; padding-left: 28%">
+        <div class="bg-white shadow-md rounded-lg">
+          <div class="flex items-center">
+            {% if data %}
+            <!-- Product Image -->
+            <div class="w-1/2">
+              <div
+                style="
+                  text-align: center;
+                  background-color: white;
+                  padding: 10px;
+                "
+                class="rounded-lg"
+              >
+                <img
+                  src="../static/alcohol_image/{{ data[6] }}"
+                  alt="alcohol"
+                  style="width: auto; height: 490px; display: inline-block"
+                  onerror="this.src='../static/image/main_img.png';"
+                />
+              </div>
             </div>
-        </main>
-    </div>
+
+            <!-- Product Info -->
+            <div class="w-1/2 pl-10 mt-10 ml-5">
+              <p class="text-gray-600 mb-4">{{data[3]}} {{data[2]}}%</p>
+              <h2 class="text-2xl font-semibold mb-2">{{data[0]}}</h2>
+              <p class="text-gray-600 mb-4">₩ {{data[1]}}</p>
+              <div class="flex items-center mb-4">
+                <span class="text-yellow-400 text-lg"
+                  >{% for _ in range(data[4]|int) %} ★ {% endfor %}</span
+                >
+                <span class="ml-2 text-sm text-gray-600">({{data[4]}}/5)</span>
+              </div>
+              <form action="/add_to_cart" method="POST">
+                <input type="hidden" name="id" value="{{ data[5] }}" />
+                <div class="flex items-center mb-4 mt-10">
+                  <input
+                    type="number"
+                    min="1"
+                    value="1"
+                    name="quantity"
+                    class="border p-2 mr-2 w-16 text-center"
+                  />
+                  <button class="bg-blue-500 text-white px-4 py-2 rounded">
+                    Add to Cart
+                  </button>
+                </div>
+              </form>
+            </div>
+            {% else %}
+            <p>No data available</p>
+            {% endif %}
+          </div>
+        </div>
+      </main>
+    </section>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // 모든 네비게이션 링크에 대한 이벤트 리스너 등록
-            var navLinks = document.querySelectorAll(".nav-link");
-            navLinks.forEach(function (link) {
-                link.addEventListener("click", function (event) {
-                    event.preventDefault();
-                    var query = link.getAttribute("data-query");
-                    window.location.href = `{{ url_for('main.main') }}?type=${query}`;
-                });
-            });
+      document.addEventListener("DOMContentLoaded", function () {
+        // 모든 네비게이션 링크에 대한 이벤트 리스너 등록
+        var navLinks = document.querySelectorAll(".nav-link");
+        navLinks.forEach(function (link) {
+          link.addEventListener("click", function (event) {
+            event.preventDefault();
+            var query = link.getAttribute("data-query");
+            window.location.href = `{{ url_for('main.main') }}?type=${query}`;
+          });
         });
+      });
     </script>
-</body>
-
+  </body>
 </html>

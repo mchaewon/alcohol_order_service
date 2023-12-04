@@ -18,13 +18,17 @@
         }
     </style>
 </head>
-<body class="bg-gray-100">
+<body class="bg-[#FFE08C]">
     {% include 'lib/header.html' %}
 
-    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 flex">
+
+    <section style="display: flex;">
         <!-- 메뉴 박스 크게 하기 -->
         {% include 'lib/alcoholmenu.html' %}
-        <main class="w-3/4">
+        <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 flex">
+
+            <main class="main" style="padding-top: 10vh; padding-left: 25%;">
+
             <div class="bg-white shadow-md rounded-lg p-4 mb-6">
                 <!-- Search and filters -->
                 <div class="flex items-center space-x-3 mb-5">
@@ -46,14 +50,16 @@
                         <a href="{{ url_for('main.detail', alcohol_id=row[5]) }}">
 
                         <div class="card bg-gray-200 rounded-lg p-4 text-center">
-                            <div style="text-align:center">
-                                <img src="https://via.placeholder.com/150" alt="Alcohol" class="rounded-md mb-2">
+                            <div style="text-align: center; background-color: white; padding: 10px;">
+                                <div style="text-align:center">
+                                    <img src="../static/alcohol_image/{{ row[6] }}" alt="Alcohol" class="rounded-md mb-2"  style="width: auto; height: 250px;display: inline-block;" onerror="this.src='../static/image/main_img.png';">
+                                </div>
                             </div>
                             
                             <div class="text-sm">{{row[3]}} {{row[2
                                 ]}}%</div>
                             <div class="font-semibold">{{row[0]}}</div>
-                            <div class="text-sm">{{row[1]}}₩</div>
+                            <div class="text-sm">₩ {{row[1]}}</div>
                             <div class="text-yellow-400 text-lg" style="display: inline-block;">{% for _ in range(row[4]|int) %} ★ {% endfor %}</div>
                             <div class="text-sm" style="display: inline-block;">({{ row[4] }}/5)</div>
                         </div>
@@ -66,6 +72,7 @@
             </div>
         </main>
     </div>
+    </section>
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
