@@ -11,6 +11,7 @@ class Oracledb:
         self.conn = cx_Oracle.connect(**db_config)
         self.cursor = self.conn.cursor()
 
+
     def select(self, query, size):
         self.cursor.execute(query)
         return self.cursor.fetchmany(size)
@@ -60,8 +61,8 @@ class Oracledb:
             except ValueError:
                 print("fail")
                 return None
-        
-        def insert(info):
+    
+        def insert(info): #signup
             try:
                 self.conn.begin() 
                 query = f"INSERT INTO CUSTOMER VALUES('{info[0]}', '{info[1]}','{info[2]}', '{info[3]}', {birth(info[4])}, '{info[5]}')"
@@ -73,7 +74,6 @@ class Oracledb:
                 print(f"Error during insert: {e}")
                 return False
             
-        
         if isiddup(info[0]):
             if birth(info[4]) != None:
                 return insert(info)
@@ -83,6 +83,44 @@ class Oracledb:
             print('duplicate id')
             
         return False
+    
+
+
+    def order_insert(self, info):
+        def birth(birth):
+            from datetime import datetime
+            try:
+                datetime.strptime(birth, '%Y-%m-%d')
+                string = f"to_date('{birth}', 'yyyy-mm-dd')"
+                return string
+            except ValueError:
+                print("fail")
+                return None
+            
+        try:
+            self.conn.begin() 
+            query = f"INSERT INTO ORDERS VALUES('{info[0]}', '{info[1]}','{info[2][0]}', {birth(info[3])})"
+            print(query)
+            self.cursor.execute(query)
+            self.conn.commit() # commit 
+            return True
+        except Exception as e: #transaction rollback
+                self.conn.rollback()
+                print(f"Error during insert: {e}")
+                return False
+        
+    def ICB_insert(self, info):
+        try:
+            self.conn.begin() 
+            query = f"INSERT INTO IS_CONTAINED_BY VALUES('{info[0]}', '{info[1]}',{info[2]}, {info[3]})"
+            print(query)
+            self.cursor.execute(query)
+            self.conn.commit() # commit 
+            return True
+        except Exception as e: #transaction rollback
+            self.conn.rollback()
+            print(f"Error during insert: {e}")
+            return False
     
     def close_db(self):
         self.cursor.close()
