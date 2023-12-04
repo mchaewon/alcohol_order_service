@@ -1,11 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="auto">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
     <title>Sign Up Form</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/checkout/">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+    <link href="../static/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        .bd-placeholder-img {
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+            
+          }
+        .btn{
+            border: none;
+        }
         .btn-hover:hover {
             background-color: #f36c6c;
         }
@@ -21,23 +35,50 @@
     </style>
 </head>
 <body class="bg-[#FFE08C] flex items-center justify-center h-screen">
-    <div class="transf bg-white p-7 rounded-lg shadow-lg w-180">
+    <div class="transf bg-white p-7 rounded-lg shadow-lg max-w-sm w-full">
         <div class="flex flex-col items-center mb-4">
             <div class="w-16 h-16 bg-gray-300 rounded-full mb-4">
-                <img class="logo w-full h-full" src="../static/image/main_img.png" alt="logo">
+                <img class="logo w-full h-full" src="../static/image/main_img.png" alt="logo" width="70" height="70">
             </div> <!-- Placeholder for logo image -->
         </div>
-        <form class="needs-validation" action="{{ url_for('auth.signup_process_form') }}" method="POST" novalidate>
-            <form class="flex flex-col items-center">
-                <input type="text" name="id" placeholder="ID" class="mb-2 p-2 w-full border rounded text-box" required/>
-                <input type="text" name="name" placeholder="Name" class="mb-2 p-2 w-full border rounded text-box" required/>
-                <input type="password" name="password" placeholder="Password" class="mb-2 p-2 w-full border rounded text-box" required/>
-                <input type="tel" name="phonenum" placeholder="Phone Number(010-xxxx-yyyy)" class="mb-2 p-2 w-full border rounded text-box" required/>
-                <input type="text" name="birth" placeholder="Birth(2000-01-01)" class="mb-2 p-2 w-full border rounded text-box" required/>
-                <input type="text" name="address" placeholder="Address" class="mb-2 p-2 w-full border rounded text-box" required/>
-                
-            </form>
-            <button type="submit" class="mt-4 bg-[#f29354] text-white py-2 px-4 rounded btn-hover">
+        <form class="needs-validation flex flex-col items-center" action="{{ url_for('auth.signup_process_form') }}" method="POST" novalidate>
+            <label for="ID" class="form-label">ID</label>
+            <input type="text" name="id" placeholder="" class="form-control mb-2 p-2 w-full border rounded text-box" required/>
+            <div class="invalid-feedback">
+                Valid ID is required.
+            </div>
+
+            <label for="Name" class="form-label">Name</label>
+            <input type="text" name="name" placeholder="" class="form-control mb-2 p-2 w-full border rounded text-box" required/>
+            <div class="invalid-feedback">
+                Valid name is required.
+            </div>
+
+            <label for="Password" class="form-label">Password</label>
+            <input type="password" name="password" placeholder="" class="form-control mb-2 p-2 w-full border rounded text-box" required/>
+            <div class="invalid-feedback">
+                Valid name is required.
+            </div>
+
+            <label for="Phone" class="form-label">Phone Number</label>
+            <input type="tel" name="phonenum" placeholder="010-xxxx-yyyy" class="form-control mb-2 p-2 w-full border rounded text-box" required/>
+            <div class="invalid-feedback">
+                Please enter your phone number.
+            </div>
+
+            <label for="birth" class="form-label">Birthday</label>
+            <input type="text" name="birth" placeholder="YYYY-MM-YY" class="form-control mb-2 p-2 w-full border rounded text-box" required/>
+            <div class="invalid-feedback">
+                Please enter your birthday.
+            </div>
+
+            <label for="address" class="form-label">Address</label>
+            <input type="text" name="address" placeholder="" class="form-control mb-2 p-2 w-full border rounded text-box" required/>
+            <div class="invalid-feedback">
+                Please enter your address.
+            </div>
+
+            <button type="submit" class="mt-4 bg-[#f29354] text-white py-2 px-4 rounded btn-hover btn btn-primary btn-lg">
                 Continue to Sign up
             </button>
         </form>
@@ -47,6 +88,9 @@
             document.querySelector('.transf').classList.add('show');
           }, 500);
     </script>
+    <script src="../static/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/js/signup.js"></script>
 </body>
 </html>
+
 
