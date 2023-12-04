@@ -25,8 +25,8 @@
         <!-- 메뉴 박스 크게 하기 -->
         {% include 'lib/alcoholmenu.html' %}
 
-        <main class="w-3/4">
-            <div class="flex">
+        <main class="w-3/4 bg-white shadow-md rounded-lg">
+            <div class="flex mt-20 ml-10">
                 <!-- Product Image -->
                 <div class="w-1/2">
                     <img src="https://via.placeholder.com/400" alt="Beer" class="rounded-lg shadow-lg">
@@ -34,7 +34,7 @@
 
                 <!-- Product Info -->
                 {% if data %}
-                <div class="w-1/2 pl-10">
+                <div class="w-1/2 pl-10 mt-10">
                     <p class="text-gray-600 mb-4">{{data[3]}} {{data[2]}}%</p>
                     <h2 class="text-2xl font-semibold mb-2">{{data[0]}}</h2>
                     <p class="text-gray-600 mb-4">{{data[1]}}₩</p>
@@ -46,7 +46,7 @@
                     </div>
                     <form action="/add_to_cart" method="POST">
                         <input type="hidden" name="id" value="{{ data[5] }}">
-                        <div class="flex items-center mb-4">
+                        <div class="flex items-center mb-4 mt-10">
                             <input type="number" min="1" value="1" name="quantity" class="border p-2 mr-2 w-16 text-center">
                             <button class="bg-blue-500 text-white px-4 py-2 rounded">Add to Cart</button>
                         </div>
