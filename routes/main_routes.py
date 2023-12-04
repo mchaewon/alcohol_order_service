@@ -95,6 +95,12 @@ def notice(page_num):
 def find():
     return render_template('search.html')
 
+@main_bp.route('/notice_contents/<noticeid>')
+def notice_contents(noticeid):
+    query = f"select writer, written_date, content from notice where notice_id = {noticeid}"
+    res = oracle.select(query, 1)
+    return render_template('notice_contents.html', data = res[0])
+
 @main_bp.route('/store/<int:page_num>')
 def store(page_num):
     query = "SELECT * FROM store"

@@ -38,7 +38,7 @@
                         {% if data %}
                         {% for row in data %}
                         <!-- Placeholder for dynamic content -->
-                        <tr>
+                        <tr onclick="window.location.href='/notice_contents/{{ row[0] }}';" style="cursor: pointer;">
                             <td class="border px-4 py-2">{{row[3]}}</td>
                             <td class="border px-4 py-2">{{row[1]}}</td>
                             <td class="border px-4 py-2">{{row[2]}}</td>

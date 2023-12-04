@@ -1,6 +1,6 @@
 <aside class="w-1/4 pr-4">
     <ul class="bg-white shadow-md rounded-lg p-4 sticky top-6 text-center">
-        <li class="py-2"><a href="{{ url_for('') }}" class="text-gray-600 hover:text-gray-900">Search</a></li>
-        <li class="py-2"><a href="{{ url_for('') }}" class="text-gray-600 hover:text-gray-900">Write</a></li>
+        <li class="py-2"><a href="{{ url_for('manager.msearch', page_num=1) }}" class="text-gray-600 hover:text-gray-900">Search</a></li>
+        <li class="py-2"><a href="{{ url_for('manager.mwrite') }}" class="text-gray-600 hover:text-gray-900">Write</a></li>
     </ul>
 </aside>
