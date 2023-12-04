@@ -76,7 +76,8 @@
                             <p class="text-lg font-bold">주문 금액</p>
                             <p class="text-lg font-bold">{{ price }}원</p>
                         </div>
-                        <button class="w-full mt-4 bg-gray-300 text-gray-700 py-2 rounded hover:bg-gray-400">주문하기</button>
+                        <a href="{{url_for('order.order')}}">
+                        <button class="w-full mt-4 bg-gray-300 text-gray-700 py-2 rounded hover:bg-gray-400">주문하기</button></a>
                     </div>
                 </div>
         </main>
