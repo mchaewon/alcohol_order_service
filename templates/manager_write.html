@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notice Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .btn{
+            cursor: pointer;
+        }
+        .hover\:bg-red-500:hover {
+            background-color: #f36c6c;
+        }
+    </style>
+</head>
+<body class="bg-[#FFE08C]">
+    {% include 'lib/manager_header.html' %}
+    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 flex">
+        <!-- Sidebar -->
+        {% include 'lib/manager_menu.html' %}
+        
+        <!-- Main content -->
+        <main class="w-3/4 h-3/4 bg-white p-5 shadow-md rounded-lg">
+            <h1 class="text-2xl font-semibold mb-4">Notice Write</h1>
+            <!-- Main Panel -->
+            <div class="flex-1 p-4">
+                <div class="flex flex-col space-y-4">
+                    <div class="flex space-x-4">
+                        <input type="text" placeholder="Name" class="border p-2 rounded w-1/4">
+                        <input type="text" placeholder="Day" class="border p-2 rounded w-1/4">
+                    </div>
+                    <textarea class="border p-2 rounded h-96" placeholder="Enter text here..."></textarea>
+                    <button class="bg-[#f29354] btn hover:bg-red-500 mt-4 px-4 py-2 text-white rounded focus:outline-none focus:shadow-outline">Submit</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // JavaScript if needed
+    </script>
+</body>
+</html>
