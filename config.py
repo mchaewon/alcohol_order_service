@@ -2,7 +2,7 @@
 SECRET_KEY = 'your_secret_key'
 
 db_config = {
-            'user': 'alcohol',
+            'user': 'KNU',
             'password': 'comp322',
             'dsn':'localhost:1521/orcl'
         }
