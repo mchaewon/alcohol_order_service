@@ -63,12 +63,15 @@
             <div class="p-5">
                 <h1 class="text-2xl font-bold mb-5">Order List</h1>
                 <!-- order list 동적으로 받아오기 -->
+
+                {%if data%}
+                {%for row in data%}
                 <div class="space-y-6">
                     <!-- 1 -->
                     <div class="bg-white p-4 mb-4 shadow rounded">
                         <div class="flex justify-between items-center mb-4">
-                            <span class="font-bold">Order ID 2012</span>
-                            <span>2023.11.30</span>
+                            <span class="font-bold">Order ID {{row[6]}}</span>
+                            <span>{{ row[5].strftime('%Y-%m-%d') }}</span>
                         </div>
                         <!--1-1-->
                         <div class="flex items-center justify-between">
@@ -77,62 +80,24 @@
                                     <img src="https://via.placeholder.com/100" alt="Product" class="h-10 w-10 rounded-full">
                                 </div> <!-- Alcohol image placeholder -->
                                 <div>
-                                    <div class="font-bold">CASS_LIGHT_355</div>
-                                    <div>beer</div>
+                                    <div class="font-bold">{{row[0]}}</div>
+                                    <div>{{row[1]}}</div>
                                 </div>
                             </div>
                             <div class="text-right">
-                                <div>2 x 4,200</div>
-                                <div class="font-bold">8,400원</div>
-                                <button onclick="openRateModal()" class="rate-button mt-2 px-4 py-2 border">Rate</button>
+                                <div>{{row[3]}} x {{row[2]}}</div>
+                                <div class="font-bold">{{row[4]}}원</div>
+                                
+                                <button onclick="openRateModal()" class="rate-button mt-2 px-4 py-2 border">Rate</button>                            
                             </div>
                         </div>
-                        <hr class="dotted-line">
-                        <!--1-2-->
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <div class="w-16 h-16 bg-gray-300 mr-4">
-                                    <img src="https://via.placeholder.com/100" alt="Product" class="h-10 w-10 rounded-full">
-                                </div> <!-- Alcohol image placeholder -->
-                                <div>
-                                    <div class="font-bold">CASS_LIGHT_355</div>
-                                    <div>beer</div>
-                                </div>
-                            </div>
-                            <div class="text-right">
-                                <div>2 x 4,200</div>
-                                <div class="font-bold">8,400원</div>
-                                <button onclick="openRateModal()" class="rate-button mt-2 px-4 py-2 border">Rate</button>
-                            </div>
-                        </div>
+
                     </div>
                 </div> 
+                {%endfor%}
+                {%endif%}
 
-                <div class="space-y-6">
-                    <!-- 2 -->
-                    <div class="bg-white p-4 mb-4 shadow rounded">
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="font-bold">Order ID 2012</span>
-                            <span>2023.11.30</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <div class="w-16 h-16 bg-gray-300 mr-4">
-                                    <img src="https://via.placeholder.com/100" alt="Product" class="h-10 w-10 rounded-full">
-                                </div> <!-- Alcohol image placeholder -->
-                                <div>
-                                    <div class="font-bold">CASS_LIGHT_355</div>
-                                    <div>beer</div>
-                                </div>
-                            </div>
-                            <div class="text-right">
-                                <div>2 x 4,200</div>
-                                <div class="font-bold">8,400원</div>
-                                <button onclick="openRateModal()" class="rate-button mt-2 px-4 py-2 border">Rate</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>  
+
 
             </div>    
 
