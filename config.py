@@ -1,6 +1,11 @@
 # config.py
 SECRET_KEY = 'your_secret_key'
 
+db_config = {
+            'user': 'alcohol',
+            'password': 'comp322',
+            'dsn':'localhost:1521/orcl'
+        }
 
 '''
 sample user id / pw
