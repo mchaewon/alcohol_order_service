@@ -24,7 +24,7 @@
             display: none;
         }
         .star-rating label {
-            color: #ddd;
+            color: #ddd; 
             float: right;
         }
         .star-rating input:checked ~ label,
@@ -32,6 +32,8 @@
         .star-rating label:hover ~ label {
             color: #f29354;
         }
+        
+
         .star-rating label:hover,
         .star-rating label:hover ~ label {
             cursor: pointer;
@@ -50,6 +52,7 @@
     </style>
 </head>
 <body>
+
     <div class="flex justify-center items-center h-screen">
         <div class="transf bg-white shadow-lg p-8 rounded-lg w-1/2">
             <div class="flex flex-col items-center">
@@ -59,11 +62,14 @@
                 </div>
                 <div class="border-t-2 border-transparent">
                     <div class="text-center">
-        
+                        <form id="searchForm" action="{{ url_for('main.search_condition') }}" method="GET">
+                        <input type="hidden" name="type" value="recommend">
+                        <input type="hidden" name="beername" value="">
                         <!-- Dropdown for Beer Types -->
                         <div class="mb-4">
                             <label for="beerType" class="block text-sm font-medium text-gray-700">주종</label>
-                            <select id="beerType" name="beerType" class="text-center mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                            <select id="beerType" name="beertype" class="text-center mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                <option>ALL</option>
                                 <option>Soju</option>
                                 <!-- Add 11 types of beer here -->
                                 <option>Beer</option>
@@ -80,37 +86,33 @@
                             </select>
                         </div>
         
-                        <!-- Text Input for Beer Name -->
-                        <div class="mb-4">
-                            <label for="beerName" class="block mb-3 text-sm font-medium text-gray-700">술 이름</label>
-                            <input type="text" id="beerName" name="beerName" class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                        </div>
-        
                         <!-- Text Input for Price -->
                         <div class="mb-4">
                             <label for="price" class="block mb-3 text-sm font-medium text-gray-700">가격</label>
-                            <input type="text"  id="minprice" placeholder="Min price" class="border p-2 rounded-md shadow-sm">
-                            <input type="text" id="maxprice" placeholder="Max price" class="border p-2 rounded-md shadow-sm">  
+                            <input type="text"  id="minprice" name="minprice"placeholder="Min price" class="border p-2 rounded-md shadow-sm">
+                            <input type="text" name="maxprice" id="maxprice" placeholder="Max price" class="border p-2 rounded-md shadow-sm">  
                         </div>
 
                         <div class="mb-4">
-                            <label for="rating" class="block mb-1 text-sm font-medium text-gray-700">평점</label>
+                            <label for="rating" name="starRating" class="block mb-1 text-sm font-medium text-gray-700">평점</label>
                             <div class="star-rating flex justify-center">
-                                <input class="star" type="radio" id="star1" name="rating" value="1"><label for="star1">&#9733;</label>
-                                <input class="star" type="radio" id="star2" name="rating" value="2"><label for="star2">&#9733;</label>
-                                <input class="star" type="radio" id="star3" name="rating" value="3"><label for="star3">&#9733;</label>
-                                <input class="star" type="radio" id="star4" name="rating" value="4"><label for="star4">&#9733;</label>
-                                <input class="star" type="radio" id="star5" name="rating" value="5"><label for="star5">&#9733;</label>
+                                <input class="star" type="radio" id="star1" name="starRating" value="1"><label for="star1">&#9733;</label>
+                                <input class="star" type="radio" id="star2" name="starRating" value="2"><label for="star2">&#9733;</label>
+                                <input class="star" type="radio" id="star3" name="starRating" value="3"><label for="star3">&#9733;</label>
+                                <input class="star" type="radio" id="star4" name="starRating" value="4"><label for="star4">&#9733;</label>
+                                <input class="star" type="radio" id="star5" name="starRating" value="5"><label for="star5">&#9733;</label>
                             </div>
                         </div>
-                        <button onclick=search() class="search-button hover-bg-change text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full transform transition-colors duration-300">
-                            Search
+                        <button onclick="submit" class="search-button hover-bg-change text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full transform transition-colors duration-300">
+                            추천받기
                         </button>
-                        
+                    </form>  
                 </div>
             </div>
         </div>
+        
     </div>
+    
     <script>
         setTimeout(function () {
             document.querySelector('.transf').classList.add('show');
@@ -119,7 +121,7 @@
         document.querySelectorAll('.star-rating .star').forEach((star, index, stars) => {
             star.addEventListener('click', () => {
                 stars.forEach((otherStar, otherIndex) => {
-                    if (otherIndex <= index) {
+                    if (otherIndex >= index) {
                         otherStar.classList.add('selected');
                     } else {
                         otherStar.classList.remove('selected');
@@ -128,25 +130,6 @@
             });
         });
 
-        function search() {
-            var beerType = document.getElementById("beerType").value;
-            var beerName = document.getElementById("beerName").value;
-            var maxprice = document.getElementById("maxprice").value;
-            var minprice = document.getElementById("minprice").value;
-            var selectedStars = document.querySelectorAll('.star-rating .star.selected').length;
-
-            // AJAX 요청
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", `{{ url_for('main.search_condition') }}?beerType=${beerType}&beerName=${beerName}&maxprice=${maxprice}&minprice=${minprice}&selectedStars=${selectedStars}`, true);
-            xhr.send();
-            xhr.onload = function() {
-                if (xhr.status == 200) {
-                    // 서버로부터의 응답 처리
-                    console.log(xhr.responseText);
-                    window.location.href = "{{ url_for('main.main') }}";
-                }
-            };
-        }
     </script>
 </body>
 </html>

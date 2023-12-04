@@ -13,7 +13,10 @@ def login():
 
 @auth_bp.route('/logout')
 def logout():
-    session.pop('userid', None)
+    if 'userid' in session:
+        session.pop('userid', None)
+    if 'managerid' in session:
+        session.pop('managerid', None)
     return redirect(url_for('auth.login'))
 
 
@@ -41,13 +44,24 @@ def signup_process_form():
 @auth_bp.route('/login_process_form', methods=['POST'])
 def login_process_form():
     if request.method == 'POST':
-        user_id = request.form.get('id')
-        password = request.form.get('password')
-        if oracle.authenticate_user(user_id, password):
-            session['userid'] = user_id
-            return redirect(url_for('main.aftersignin'))
-        else:
-            return redirect(url_for('auth.login'))
+        type = request.form.get('type')
+        if type == 'customer':
+            user_id = request.form.get('id')
+            password = request.form.get('password')
+            if oracle.authenticate_user(user_id, password):
+                session['userid'] = user_id
+                return redirect(url_for('main.aftersignin'))
+            else:
+                return redirect(url_for('auth.login'))
+        else: #manager
+            manager_id = request.form.get('id')
+            manager_name = request.form.get('password')
+            if oracle.authenticate_manager(manager_id, manager_name):
+                session['managerid'] = (manager_id, manager_name)
+                return redirect(url_for('manager.msearch', page_num=1))
+            else:
+                return redirect(url_for('auth.login'))
+
     else:
         return "invalid access"
     
