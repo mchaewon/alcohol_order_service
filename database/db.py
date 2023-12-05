@@ -4,7 +4,7 @@ from config import db_config
 from config import current_os
 
 if current_os == 'mac':
-    cx_Oracle.init_oracle_client(libdir="/Volumes/instantclient-basic-macos.x64-19.8.0.0.0dbru")
+    cx_Oracle.init_oracle_client(lib_dir="/Volumes/instantclient-basic-macos.x64-19.8.0.0.0dbru")
 
 class Oracledb:
     def __init__(self):
