@@ -1,8 +1,10 @@
 # database/db.py
 import cx_Oracle
 from config import db_config
-cx_Oracle.init_oracle_client(lib_dir="/Volumes/instantclient-basic-macos.x64-19.8.0.0.0dbru")
+from config import os
 
+if os == 'mac':
+    cx_Oracle.init_oracle_client(libdir="/Volumes/instantclient-basic-macos.x64-19.8.0.0.0dbru")
 
 class Oracledb:
     def __init__(self):
