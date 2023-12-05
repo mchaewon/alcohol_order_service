@@ -17,4 +17,8 @@ current_os = 'window'
 sample user id / pw
 JzUx2510 / nMczX8294
 TdlZ4221 / hotly4729
+
+sample manager id / name
+11 / JegalHaeun
+2 / KimEunji
 '''
