@@ -104,6 +104,19 @@ class Oracledb:
                 self.conn.rollback()
                 print(f"Error during insert: {e}")
                 return False
+    
+    def star_insert(self, info):
+        try:
+            self.conn.begin() 
+            query = f"INSERT INTO POINT VALUES('{info[0]}', '{info[1]}','{info[2]}', {info[3]})"
+            print(query)
+            self.cursor.execute(query)
+            self.conn.commit() # commit 
+            return True
+        except Exception as e: #transaction rollback
+                self.conn.rollback()
+                print(f"Error during insert: {e}")
+                return False
         
     def ICB_insert(self, info):
         try:
