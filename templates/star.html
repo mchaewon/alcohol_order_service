@@ -25,6 +25,16 @@
         .star-rating input:checked ~ label {
             color: #f0a30a;
         }
+        .btn{
+            background-color: #f29354;
+            color: #FFF;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+        }
+        .btn:hover {
+            background-color: #f36c6c;
+        }
     </style>
 </head>
 <body class="bg-[#FFE08C]">
@@ -47,10 +57,10 @@
                                 <input type="radio" name='star' id="star2" name="rating" value="2"><label for="star2" title="2 stars">★</label>
                                 <input type="radio" name='star' id="star1" name="rating" value="1"><label for="star1" title="1 star">★</label>
                             </div>
-                            
-                                <button onclick="window.location.href='nextpage.html'" class="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                    Submit
-                                </button>
+
+                            <button onclick="window.location.href='nextpage.html'" class="mt-5 btn text-white font-bold py-2 px-4 rounded">
+                                Submit
+                            </button>
                         </form>
                         </div>
                     </div>

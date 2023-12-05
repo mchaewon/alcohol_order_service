@@ -20,6 +20,16 @@
         .profile-card {
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
+        .btn{
+            background-color: #f29354;
+            color: #FFF;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+        }
+        .btn:hover {
+            background-color: #f36c6c;
+        }
     </style>
 </head>
 <body class="bg-[#FFE08C]">
@@ -28,31 +38,33 @@
     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 flex">
         <!-- 메뉴 박스 크게 하기 -->
         {% include 'lib/mymenu.html' %}
-        <main class="w-3/4 h-3/4">
-            <div class="bg-white p-6 rounded-lg profile-card max-w-md w-full h-full">
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="font-semibold">Name</div>
-                    <div>{{data[1]}}</div>
-    
-                    <div class="font-semibold">ID</div>
-                    <div>{{data[0]}}</div>
-    
-                    <div class="font-semibold">Phone</div>
-                    <div>{{data[3]}}</div>
-    
-                    <div class="font-semibold">Birth</div>
-                    <div>{{data[4]}}</div>
-    
-                    <div class="font-semibold">Address</div>
-                    <div>{{data[5]}}</div>
+        <main class="flex-1">
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="font-semibold text-center">Name</div>
+                            <div class="text-center">{{data[1]}}</div>
+            
+                            <div class="font-semibold text-center">ID</div>
+                            <div class="text-center">{{data[0]}}</div>
+            
+                            <div class="font-semibold text-center">Phone</div>
+                            <div class="text-center">{{data[3]}}</div>
+            
+                            <div class="font-semibold text-center">Birth</div>
+                            <div class="text-center">{{data[4]}}</div>
+            
+                            <div class="font-semibold text-center">Address</div>
+                            <div class="text-center">{{data[5]}}</div>
+                        </div>
+                        <div class="mt-6 flex">
+                            <a href="{{ url_for('order.orderlist') }}" class="btn flex-grow text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline text-center">
+                                ORDER LIST
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="mt-6 flex">
-                    <a href="{{ url_for('order.orderlist') }}" class="flex-grow bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline text-center">
-                        ORDER LIST
-                    </a>
-                </div>
-                
-            </div>
+            
         </main>
     </div>
 
