@@ -24,26 +24,27 @@
     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 flex">
         <!-- 메뉴 박스 크게 하기 -->
         {% include 'lib/alcoholmenu.html' %}
-        
         <main class="w-3/4">
             <div class="bg-white shadow-md rounded-lg p-4 mb-6">
                 <!-- Search and filters -->
-                <div class="flex items-center space-x-3 mb-5">
-                    <form id="searchForm" action="{{ url_for('main.search_condition') }}" method="GET">
-                        <input type="hidden" name="type" value="search">
-                        <input type="hidden" name="beertype" value="{{ status }}">
-                        <input type="text" name="beername" placeholder="Search alcohol name" class="border p-2">
-                        <button onclick="submit" class="px-2 py-2 bg-gray-200 rounded" >🔍</button>
-                        <input type="text" name="minprice" placeholder="Min price" class="border p-2">
-                        <input type="text" name="maxprice" placeholder="Max price" class="border p-2">
-                        <select name="starRating" class="border p-2">
-                            <option value="1">⭐</option>
-                            <option value="2">⭐⭐</option>
-                            <option value="3">⭐⭐⭐</option>
-                            <option value="4">⭐⭐⭐⭐</option>
-                            <option value="5">⭐⭐⭐⭐⭐</option>
+                <div class="flex flex-col items-center mb-5">
+                    <div class="flex items-center space-x-3">
+                        <input type="text" placeholder="Search alcohol name" class="border p-2">
+                        <input type="text" placeholder="Min price" class="border p-2">
+                        <input type="text" placeholder="Max price" class="border p-2">
+                    
+                    </div>
+                    <div class="flex items-center space-x-3 mt-3">
+                        <input type="text" placeholder="Degree" class="border p-2">
+                        <select class="border p-2">
+                            <option>⭐</option>
+                            <option>⭐⭐</option>
+                            <option>⭐⭐⭐</option>
+                            <option>⭐⭐⭐⭐</option>
+                            <option>⭐⭐⭐⭐⭐</option>
                         </select>
-                    </form>
+                        <button class="px-2 py-2 bg-gray-200 rounded">🔍</button>
+                    </div>
                 </div>
                 <div class="grid grid-cols-3 gap-4">
                     {% if data %}
@@ -53,7 +54,7 @@
                         <div class="card bg-gray-200 rounded-lg p-4 text-center">
                             <div style="text-align: center; background-color: white; padding: 10px;">
                                 <div style="text-align:center">
-                                    <img src="../static/alcohol_image/{{ row[6] }}" alt="Alcohol" class="rounded-md mb-2"  style="width: auto; height: 250px; display: inline-block;" onerror="this.src='../static/image/main_img.png';">
+                                    <img src="../static/alcohol_image/{{ row[6] }}" alt="Alcohol" class="rounded-md mb-2"  style="width: auto; height: 250px;display: inline-block;" onerror="this.src='../static/image/main_img.png';">
                                 </div>
                             </div>
                             
@@ -71,6 +72,7 @@
 
                 </div>
             </div>
+
         </main>
     </div>
 
@@ -86,30 +88,6 @@
                 });
             });
         });
-
-        function search() {
-            var beerType = document.getElementById("beerType").value;
-            var beerName = document.getElementById("beername").value;
-            var maxprice = document.getElementById("maxprice").value;
-            var minprice = document.getElementById("minprice").value;
-            
-            var selectElement = document.getElementById("starRating");
-            var selectedOption = selectElement.options[selectElement.selectedIndex];
-            var ratingValue = parseInt(selectedOption.value, 10);
-/*
-            // AJAX 요청
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", `{{ url_for('main.search_condition') }}?beerType=${beerType}&beerName=${beerName}&maxprice=${maxprice}&minprice=${minprice}&selectedStars=${ratingValue}`, true);
-            xhr.send();
-            xhr.onload = function() {
-                if (xhr.status == 200) {
-                    // 서버로부터의 응답 처리
-                    console.log(xhr.responseText);
-
-                }
-            };*/
-        }
-
     </script>
 </body>
 </html>
