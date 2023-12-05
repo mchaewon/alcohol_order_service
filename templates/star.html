@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="shortcut icon" href="../static/image/favicon.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rating Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .star-rating {
+            unicode-bidi: bidi-override;
+            direction: rtl;
+        }
+        .star-rating input {
+            display: none;
+        }
+        .star-rating label {
+            font-size: 2rem;
+            padding: 0 5px;
+            cursor: pointer;
+            color: #ccc;
+        }
+        .star-rating label:hover,
+        .star-rating label:hover ~ label,
+        .star-rating input:checked ~ label {
+            color: #f0a30a;
+        }
+    </style>
+</head>
+<body class="bg-[#FFE08C]">
+    {% include 'lib/header.html' %}
+    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 flex">
+        <!-- 메뉴 박스 크게 하기 -->
+        {% include 'lib/mymenu.html' %}
+        <main class="flex-1">
+            <div class="py-12">
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
+                        <div class="text-center">
+                            <h2 class="text-2xl font-bold mb-4">Rate</h2>
+                            <div class="star-rating mb-4">
+                                <input type="radio" id="star5" name="rating" value="5"><label for="star5" title="5 stars">★</label>
+                                <input type="radio" id="star4" name="rating" value="4"><label for="star4" title="4 stars">★</label>
+                                <input type="radio" id="star3" name="rating" value="3"><label for="star3" title="3 stars">★</label>
+                                <input type="radio" id="star2" name="rating" value="2"><label for="star2" title="2 stars">★</label>
+                                <input type="radio" id="star1" name="rating" value="1"><label for="star1" title="1 star">★</label>
+                            </div>
+                            <button onclick="window.location.href='nextpage.html'" class="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                Submit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script>
+        // Add any JavaScript you need here
+    </script>
+</body>
+</html>
+
