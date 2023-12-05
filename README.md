@@ -14,7 +14,7 @@
 <br> </br>
 <br> </br>
 
-## 🍺프로젝트 소개
+## 🍺 프로젝트 소개
 
 DB를 사용한 web 기반 프로그램 제작
 
@@ -31,9 +31,20 @@ DB를 사용한 web 기반 프로그램 제작
 💡 **차별성** : 랜덤 주류 추천 기능을 통하여 사용자가 다양한 주류를 볼 수 있도록 한다.
 <br> </br>
 <br> </br>
+
+## 🍷 데모 영상
+<a href = "https://youtu.be/lgBAGRqF85c?si=A4GEQfFO9bmLoiX1">
+<img width="535" alt="스크린샷 2023-12-06 오전 4 11 40" src="https://github.com/mchaewon/alcohol_order_service/assets/94179998/da67622c-ea71-4131-8f6e-4c99e35aeda0">
+</a>
+
+https://youtu.be/lgBAGRqF85c?si=A4GEQfFO9bmLoiX1
+
+
+<br> </br>
+<br> </br>
 <br> </br>
 
-## 개발 환경
+## 🍹 개발 환경
 
 <img src="https://img.shields.io/badge/python-3776AB?style=flat-square&logo=python&logoColor=white"/> <img src="https://img.shields.io/badge/oracle-F80000?style=flat-square&logo=oracle&logoColor=white"/> <img src="https://img.shields.io/badge/flask-000000?style=flat-square&logo=flask&logoColor=white"/>
 
@@ -51,7 +62,7 @@ cx_Oracle : 8.3.0
 <br> </br>
 <br> </br>
 
-## 실행 및 사용방법
+## 🍾 실행 및 사용방법
 
 ```markdown
 ### environment setting
@@ -69,7 +80,7 @@ pip install -r requirements.txt
 <br> </br>
 <br> </br>
 
-## 기능 설명
+## 🥃 기능 설명
 
 ```
 1. 회원가입 / 로그인
@@ -111,11 +122,11 @@ pip install -r requirements.txt
 <br> </br>
 <br> </br>
 
-## 🐣팀원 소개
+## 🐣 팀원 소개
 
 ### 7조 : 디비디비-딥!
 
-team notion : <a href = "https://remarkable-wakeboard-c22.notion.site/DB_Project-Team7-204b8d5bf8e649c5a68d5c15f4466890?pvs=4" target = "_blank"><img src="https://img.shields.io/badge/notion-000000?style=flat-square&logo=notion&logoColor=white"/></a>
+**team notion :** <a href = "https://remarkable-wakeboard-c22.notion.site/DB_Project-Team7-204b8d5bf8e649c5a68d5c15f4466890?pvs=4" target = "_blank"><img src="https://img.shields.io/badge/notion-000000?style=flat-square&logo=notion&logoColor=white"/></a>
 
 ![image](https://github.com/mchaewon/alcohol_order_service/assets/94179998/ec4d7b5f-cc86-48a7-bd68-af42690c532e)
 
