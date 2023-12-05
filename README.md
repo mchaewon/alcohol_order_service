@@ -1,10 +1,17 @@
-# 주류룹 : 주류 추천 및 구매 시스템
+<div align="center">
+  <h1>주류룹 : 주류 추천 및 구매 시스템
+  
+  </h1>
+</div>
 
----
 
-![Alt text](image.png)
 
----
+<div align="center">
+  <img src="https://github.com/mchaewon/alcohol_order_service/assets/94179998/d4dd6885-d332-4255-bc03-50b377ae7eb6" alt="주류 이미지">
+</div>
+
+
+
 
 ## 🍺프로젝트 소개
 
@@ -22,6 +29,9 @@ DB를 사용한 web 기반 프로그램 제작
 
 💡 **차별성** : 랜덤 주류 추천 기능을 통하여 사용자가 다양한 주류를 볼 수 있도록 한다.
 
+
+
+
 ## 개발 환경
 
 ```markdown
@@ -33,6 +43,9 @@ flask : 2.2.2
 Werkzeug : 2.2.2
 cx_Oracle : 8.3.0
 ```
+
+
+
 
 ## 실행 및 사용방법
 
@@ -48,6 +61,9 @@ pip install -r requirements.txt
 3. 처음 웹 방문이면 회원가입 후 로그인 진행 / 회원이라면 로그인 진행
 ```
 
+
+
+
 ## 기능 설명
 
 ```
@@ -62,6 +78,9 @@ pip install -r requirements.txt
 	3.2 Write
 		3.1.1 공지사항을 작성 가능
 ```
+
+
+
 
 ## 🐣팀원 소개
 
