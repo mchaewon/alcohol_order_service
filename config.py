@@ -9,7 +9,7 @@ db_config = {
         }
 
 # window, mac
-os = 'window' 
+current_os = 'window' 
 
 
 
