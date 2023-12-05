@@ -115,6 +115,7 @@ pip install -r requirements.txt
 
 ### 7조 : 디비디비-딥!
 
+team notion : <a href = "https://remarkable-wakeboard-c22.notion.site/DB_Project-Team7-204b8d5bf8e649c5a68d5c15f4466890?pvs=4" target = "_blank"><img src="https://img.shields.io/badge/notion-000000?style=flat-square&logo=notion&logoColor=white"/></a>
 
 ![image](https://github.com/mchaewon/alcohol_order_service/assets/94179998/ec4d7b5f-cc86-48a7-bd68-af42690c532e)
 
