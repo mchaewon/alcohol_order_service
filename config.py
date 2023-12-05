@@ -3,13 +3,13 @@ SECRET_KEY = 'your_secret_key'
 
 # your db_config
 db_config = {
-            'user': 'alcohol',
+            'user': 'KNU',
             'password': 'comp322',
-            'dsn':'localhost:1521/orcl'
+            'dsn':'localhost:1521/xe'
         }
 
 # window, mac
-current_os = 'window' 
+current_os = 'mac' 
 
 
 
