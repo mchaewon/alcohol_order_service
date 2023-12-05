@@ -1,6 +1,10 @@
 # database/db.py
 import cx_Oracle
 from config import db_config
+from config import current_os
+
+if current_os == 'mac':
+    cx_Oracle.init_oracle_client(libdir="/Volumes/instantclient-basic-macos.x64-19.8.0.0.0dbru")
 
 class Oracledb:
     def __init__(self):
@@ -154,7 +158,7 @@ class Oracledb:
 
         
     def search(self, info):
-        #info : [beer_type, beer_name, minprice, maxprice, star]
+        #info : [beer_type, beer_name, minprice, maxprice, star, degree]
         # lower(A.Type) NOT IN {l} 
         l = "('soju', 'beer', 'makgeolli', 'wine', 'sake', 'whiskey', 'tequila', 'brandy', 'gin', 'rum')"
         wherequery = []
@@ -173,11 +177,15 @@ class Oracledb:
             info[2] = 0
         if len(info[3]) == 0:
             info[3] = 100000000
-        
+
+        if len(info[5]) == 0:
+            info[5] = 0
+        print(info[5])
         wherequery.append(f"A.Price between {info[2]} and {info[3]}")
         if info[4] == None:
             info[4] = 1
         wherequery.append(f"P.Star_rating >= {info[4]}")
+        wherequery.append(f"A.Alcohol_Degree >= {info[5]}")
         wq = ""
         if len(wherequery) > 0:
             wq = wherequery[0]

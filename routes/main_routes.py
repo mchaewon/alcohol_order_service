@@ -63,8 +63,9 @@ def search_condition():
     minprice = request.args.get('minprice')
     maxprice = request.args.get('maxprice')
     star = request.args.get('starRating')
+    degree = request.args.get('degree')
 
-    condition = [beer_type, beer_name, minprice, maxprice, star]
+    condition = [beer_type, beer_name, minprice, maxprice, star, degree]
    
     result = oracle.search(condition)
     if type == 'recommend':

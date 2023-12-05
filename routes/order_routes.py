@@ -16,7 +16,7 @@ def mypage():
 def orderlist():
   userid = session['userid']
 
-  query = f"SELECT A.Name, A.Type, A.Price, ICB.Quantity, ICB.Total_price, TRUNC(O.Order_date) as Order_date, O.Order_ID FROM ORDERS O, IS_CONTAINED_BY ICB, ALCOHOL A WHERE O.Order_ID=ICB.Order_ID AND A.Alcohol_ID = ICB.Alcohol_ID AND O.Customer_ID='{userid}' ORDER BY O.Order_date DESC"
+  query = f"SELECT A.Name, A.Type, A.Price, ICB.Quantity, ICB.Total_price, TRUNC(O.Order_date) as Order_date, O.Order_ID, A.Picture FROM ORDERS O, IS_CONTAINED_BY ICB, ALCOHOL A WHERE O.Order_ID=ICB.Order_ID AND A.Alcohol_ID = ICB.Alcohol_ID AND O.Customer_ID='{userid}' ORDER BY O.Order_date DESC"
   
   print(query)   
 
