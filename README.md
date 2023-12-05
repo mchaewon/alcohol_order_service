@@ -15,8 +15,6 @@
 
 ## 🍺프로젝트 소개
 
----
-
 DB를 사용한 web 기반 프로그램 제작
 
 ```
@@ -30,9 +28,10 @@ DB를 사용한 web 기반 프로그램 제작
 💡 **차별성** : 랜덤 주류 추천 기능을 통하여 사용자가 다양한 주류를 볼 수 있도록 한다.
 
 
-
-
 ## 개발 환경
+<img src="https://img.shields.io/badge/python-3776AB?style=flat-square&logo=python&logoColor=white"/> <img src="https://img.shields.io/badge/oracle-F80000?style=flat-square&logo=oracle&logoColor=white"/> <img src="https://img.shields.io/badge/flask-000000?style=flat-square&logo=flask&logoColor=white"/>
+
+
 
 ```markdown
 ### version
@@ -86,8 +85,8 @@ pip install -r requirements.txt
 
 ### 7조 : 디비디비-딥!
 
-| 김은정                                                                                                                                                                   | 김은지                                                                                                                                                                     | 문채원                                                                                                                                                                   |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|김은정|김은지|문채원|
+|:-:|:-:|:-:|
 | ![image](https://avatars.githubusercontent.com/u/94179998?v=4)                                                                                                           | ![image](https://avatars.githubusercontent.com/u/87495422?v=4)                                                                                                             | ![image](https://avatars.githubusercontent.com/u/111948424?v=4)                                                                                                          |
 | <a href="https://github.com/ezzkimm/" target="_blank"><img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white"/></a> | <a href="https://github.com/EunJiKim02" target="_blank"><img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white"/></a> | <a href="https://github.com/mchaewon" target="_blank"><img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white"/></a> |
 | Documents                                                                                                                                                                | Front-end                                                                                                                                                                  | Back-end                                                                                                                                                                 |
