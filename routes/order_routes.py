@@ -33,26 +33,6 @@ def orderlist():
   return render_template('order_list.html', data = result)
 
 
-@order_bp.route('/submit_rating', methods=['POST'])
-def submit_rating():
-    
-    rating = request.form.get('rating')
-    alcohol_id = request.form.get('alcohol_ID')
-    customer_id = session['userid']
-    point_id = generate_random_id(8)
-
-    pointresult = 1
-    while pointresult == 1:
-        point_id = generate_random_id()
-        pointquery = f"SELECT Count(*) FROM POINT WHERE Point_ID = '{point_id}'"
-        pointresult = oracle.select(pointquery, 1)[0]
-    
-    info = [point_id, alcohol_id, customer_id, rating]
-    oracle.star_insert(info)
-    # Do something with the rating (e.g., store it in a database)
-    
-    # Return a response (you can customize this based on your needs)
-    return jsonify({'status': 'success', 'message': 'Rating submitted successfully'})
 
 
 @order_bp.route("/order")
