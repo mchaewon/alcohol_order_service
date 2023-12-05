@@ -4,6 +4,14 @@ from database.db import Oracledb
 order_bp = Blueprint('order', __name__)
 oracle = Oracledb()
 
+import random
+import string
+
+def generate_random_id(length=8):
+    characters = string.ascii_letters + string.digits
+    random_id = ''.join(random.choice(characters) for _ in range(length))
+    return random_id
+
 @order_bp.route("/mypage")
 def mypage():
   userid = session['userid']
@@ -16,18 +24,36 @@ def mypage():
 def orderlist():
   userid = session['userid']
 
-  query = f"SELECT A.Name, A.Type, A.Price, ICB.Quantity, ICB.Total_price, TRUNC(O.Order_date) as Order_date, O.Order_ID, A.Picture FROM ORDERS O, IS_CONTAINED_BY ICB, ALCOHOL A WHERE O.Order_ID=ICB.Order_ID AND A.Alcohol_ID = ICB.Alcohol_ID AND O.Customer_ID='{userid}' ORDER BY O.Order_date DESC"
+  query = f"SELECT A.Name, A.Type, A.Price, ICB.Quantity, ICB.Total_price, TRUNC(O.Order_date) as Order_date, O.Order_ID, A.Picture, A.Alcohol_ID, P.Star_rating FROM ORDERS O JOIN IS_CONTAINED_BY ICB ON O.Order_ID = ICB.Order_ID JOIN ALCOHOL A ON A.Alcohol_ID = ICB.Alcohol_ID LEFT JOIN POINT P ON O.Customer_ID = P.Customer_ID AND P.Alcohol_ID = A.Alcohol_ID WHERE O.Customer_ID='{userid}' ORDER BY O.Order_date DESC"
   
-  print(query)   
+  print(query)
 
   result = oracle.selectall(query)
   print(result)
   return render_template('order_list.html', data = result)
 
-@order_bp.route("/rate_point")
-def rate_point():
+
+@order_bp.route('/submit_rating', methods=['POST'])
+def submit_rating():
     
-    return render_template('order_list.html')
+    rating = request.form.get('rating')
+    alcohol_id = request.form.get('alcohol_ID')
+    customer_id = session['userid']
+    point_id = generate_random_id(8)
+
+    pointresult = 1
+    while pointresult == 1:
+        point_id = generate_random_id()
+        pointquery = f"SELECT Count(*) FROM POINT WHERE Point_ID = '{point_id}'"
+        pointresult = oracle.select(pointquery, 1)[0]
+    
+    info = [point_id, alcohol_id, customer_id, rating]
+    oracle.star_insert(info)
+    # Do something with the rating (e.g., store it in a database)
+    
+    # Return a response (you can customize this based on your needs)
+    return jsonify({'status': 'success', 'message': 'Rating submitted successfully'})
+
 
 @order_bp.route("/order")
 def order():
@@ -35,11 +61,6 @@ def order():
     import random
     import string
 
-    def generate_random_id(length=8):
-        characters = string.ascii_letters + string.digits
-        random_id = ''.join(random.choice(characters) for _ in range(length))
-        return random_id
-    
     current_date = datetime.now().strftime('%Y-%m-%d')
     userid = session['userid']
 
