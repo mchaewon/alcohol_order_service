@@ -92,7 +92,10 @@
                                 <div class="font-bold">{{ row[4] }}원</div>
             
                                 {% if row[9] == None %}
-                                    <button onclick="openRateModal('{{ row[6] }}')" class="rate-button mt-2 px-4 py-2 border">Rate</button>
+                                    <form action="{{ url_for('main.star') }}" method="GET">
+                                        <input type="hidden" name="alcoholid" value="{{row[8]}}">
+                                        <button onclick="submit" class="rate-button mt-2 px-4 py-2 border">Rate</button>
+                                    </form>
                                 {% else %}
                                     <div class="rate-div mt-2 px-4 py-2 border" id="rateDiv-{{ row[6] }}"></div>
                                     <script>
@@ -170,64 +173,6 @@
         </main>
     </div>
 
-    
-    <script>
-        // Optional: Any additional JavaScript can be added here.
-        function openRateModal() {
-            document.getElementById('rateModal').classList.remove('hidden');
-        }
 
-        function closeRateModal() {
-            document.getElementById('rateModal').classList.add('hidden');
-            // Here you would also handle the logic to update the rating in the original window
-        }
-
-        
-
-        function submitRating(alcohol_id) {
-            // Retrieve the selected rating
-            const rating = document.querySelector('input[name="rating"]:checked').value;
-            console.log(alcohol_id)
-            // Update the rating on the original page (replace this with your logic)
-            const ratingElement = document.createElement('div');
-            ratingElement.className = 'flex items-center';
-
-            // Fill the appropriate number of stars with yellow color
-            for (let i = 1; i <= 5; i++) {
-                const star = document.createElement('span');
-                star.innerHTML = '★';
-                star.style.color = i <= rating ? '#fbbf24' : '#ccc';
-                ratingElement.appendChild(star);
-            }
-
-            // Replace the rate button with the displayed rating
-            const rateButton = document.querySelector('.rate-button');
-            rateButton.parentNode.replaceChild(ratingElement, rateButton);
-
-            // Create a new FormData object
-            const formData = new FormData();
-            formData.append('rating', rating);
-            formData.append('alcohol_ID', alcohol_id)
-
-            // Make an HTTP POST request to the Flask server
-            fetch('/submit_rating', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Handle the response from the server if needed
-                console.log(data);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-
-            // Close the modal
-            closeRateModal();
-        }
-        
-    
-    </script>
 </body>
 </html>

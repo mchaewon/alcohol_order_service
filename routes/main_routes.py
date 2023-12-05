@@ -2,6 +2,7 @@
 from flask import render_template, redirect, url_for, session, Blueprint, request, jsonify
 from database.db import Oracledb
 import json
+from routes.order_routes import generate_random_id
 
 main_bp = Blueprint('main', __name__)
 oracle = Oracledb()
@@ -109,6 +110,7 @@ def store(page_num):
     city = 'all'
     if 'city' in session:
         city = session['city'].lower()
+        session.pop('city', None)
     if city == 'all':
         query = "SELECT * FROM store"
     else:
@@ -118,17 +120,41 @@ def store(page_num):
     page, result = oracle.selectpage(query, 20, page_num)
     return render_template('store.html', page=page, data=result)
 
+@main_bp.route('/star')
+def star():
+    alcohol_id = request.args.get('alcoholid')
+    print(alcohol_id)
+    return render_template('star.html', data=alcohol_id)
+
+
+@main_bp.route('/star_process')
+def star_process():
+    rating = request.args.get('star')
+    alcohol_id = request.args.get('alcoholid')
+    point_id = generate_random_id(8)
+    customer_id = session['userid']
+
+    pointresult = 1
+    while pointresult == 1:
+        point_id = generate_random_id()
+        pointquery = f"SELECT Count(*) FROM POINT WHERE Point_ID = '{point_id}'"
+        pointresult = oracle.select(pointquery, 1)[0]
+    
+    info = [point_id, alcohol_id, customer_id, rating]
+    print(info)
+    oracle.star_insert(info)
+    print(star)
+    
+    return redirect(url_for('order.orderlist'))
+
+
 @main_bp.route('/find_store')
 def find_store():
-    cities = ['Seoul', 'Busan', 'Daegu', 'Incheon', 'Gwangju', 'Daejeon', 'Ulsan','Gyeonggi', 'Gangwon', 'Chungcheongbuk', 'Chungcheongnam', 'Jeollabuk', 'Jeollanam', 'Gyeongsangbuk', 'Gyeongsangnam']
 
     city = request.args.get('city')
     session['city'] = city
     return redirect(url_for('main.store', page_num=1))
 
-
-
-    
 
 
 @main_bp.route('/detail/<alcohol_id>')
