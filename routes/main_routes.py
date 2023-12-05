@@ -6,6 +6,7 @@ import json
 main_bp = Blueprint('main', __name__)
 oracle = Oracledb()
 
+
 @main_bp.route('/')
 def start():
     return render_template('main.html')
@@ -13,6 +14,7 @@ def start():
 @main_bp.route('/aftersignin')
 def aftersignin():
     return render_template('after_signin.html')
+
 
 @main_bp.route('/random')
 def random():
@@ -104,10 +106,29 @@ def notice_contents(noticeid):
 
 @main_bp.route('/store/<int:page_num>')
 def store(page_num):
-    query = "SELECT * FROM store"
+    city = 'all'
+    if 'city' in session:
+        city = session['city'].lower()
+    if city == 'all':
+        query = "SELECT * FROM store"
+    else:
+        query = f"SELECT * FROM store Where lower(address) like '%{city}%' "
+    print(query)
     result = oracle.selectall(query)
     page, result = oracle.selectpage(query, 20, page_num)
     return render_template('store.html', page=page, data=result)
+
+@main_bp.route('/find_store')
+def find_store():
+    cities = ['Seoul', 'Busan', 'Daegu', 'Incheon', 'Gwangju', 'Daejeon', 'Ulsan','Gyeonggi', 'Gangwon', 'Chungcheongbuk', 'Chungcheongnam', 'Jeollabuk', 'Jeollanam', 'Gyeongsangbuk', 'Gyeongsangnam']
+
+    city = request.args.get('city')
+    session['city'] = city
+    return redirect(url_for('main.store', page_num=1))
+
+
+
+    
 
 
 @main_bp.route('/detail/<alcohol_id>')
