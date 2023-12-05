@@ -1,5 +1,9 @@
+<div align="center"><img src ="https://capsule-render.vercel.app/api?type=egg&color=FCB188&height=100&section=header&text=주류륩&fontSize=90"></div>
+
+
+
 <div align="center">
-  <h1>주류룹 : 주류 추천 및 구매 시스템</h1>
+  <h1>: 주류 추천 및 구매 시스템</h1>
 </div>
 <br> </br>
 
